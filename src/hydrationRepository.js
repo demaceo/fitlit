@@ -4,7 +4,7 @@ class HydrationRepository {
     this.ouncesAverage = 0;
     this.ouncesRecord = [];
   }
-  updateHydration(date, amount) {
+  updateAverageOunces(date, amount) {
     this.ouncesRecord.unshift({
       [date]: amount
     });
@@ -22,14 +22,6 @@ class HydrationRepository {
       }
       return sum
     }, 0)
-  }
-  updateHydration(date, amount) {
-    this.ouncesRecord.unshift({[date]: amount});
-    if (this.ouncesRecord.length) {
-      this.ouncesAverage = Math.round((amount + (this.ouncesAverage * (this.ouncesRecord.length - 1))) / this.ouncesRecord.length);
-    } else {
-      this.ouncesAverage = amount;
-    }
   }
 }
 
