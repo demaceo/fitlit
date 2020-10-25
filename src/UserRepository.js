@@ -1,19 +1,22 @@
 import sleepData from './data/sleep';
+import hydrationData from './data/hydration';
+import activityData from './data/activity';
+import userData from './data/users';
 
 class UserRepository {
   constructor() {
     this.users = [];
   }
   getUser(id) {
-    return this.users.find(function(user) {
+    return this.users.find(user => {
       return user.id === id;
     })
   }
   calculateAverageStepGoal() {
-    let goals = this.users.map(function(user) {
+    let goals = this.users.map(user => {
       return user.dailyStepGoal;
     });
-    let total = goals.reduce(function(sum, goal) {
+    let total = goals.reduce((sum, goal) => {
       sum += goal;
       return sum;
     }, 0);
@@ -93,7 +96,7 @@ class UserRepository {
     return sleepData.filter(sleep => {
       return sleep.date === date;
     }).sort((a, b) => {
-      return a.hoursSlept - b.hoursSlept;
+      return a.sleepQuality - b.sleepQuality;
     })[0].userID;
   }
 }

@@ -1,4 +1,6 @@
-import { expect } from 'chai';
+import {
+  expect
+} from 'chai';
 
 import UserRepository from '../src/UserRepository';
 import User from '../src/User';
@@ -8,7 +10,13 @@ describe('UserRepository', function() {
   let user1;
   let user2;
   let user3;
-  let userRepository;
+  let sleep1;
+  let sleep2;
+  let sleep3;
+  let testRepository;
+  //what is getting passed into userRepository? It has access to all the
+  //the user d
+
   beforeEach(() => {
     user1 = new User({
       'id': 1,
@@ -51,121 +59,189 @@ describe('UserRepository', function() {
         33
       ]
     })
-    userRepository = new UserRepository();
-    userRepository.users.push(user1, user2, user3);
-  })
+    testRepository = new UserRepository();
+    testRepository.users.push(user1, user2, user3);
+    //^^This code is trying to put three users into UserRepository
+    //we want this to be testRepository--a smaller subset for testing purposes.
+  });
   it('should be a function', function() {
     expect(UserRepository).to.be.a('function');
   });
   it('should be an instance of user repository', function() {
-    expect(userRepository).to.be.an.instanceof(UserRepository);
+    expect(testRepository).to.be.an.instanceof(UserRepository);
   });
   it('should hold an array of users', function() {
-    expect(userRepository.users).to.deep.equal([user1, user2, user3]);
-    expect(userRepository.users.length).to.equal(3);
+    expect(testRepository.users).to.deep.equal([user1, user2, user3]);
+    expect(testRepository.users.length).to.equal(3);
   });
   it('getUser should return user object when given a user id', function() {
-    expect(userRepository.getUser(2)).to.equal(user2);
+    expect(testRepository.getUser(2)).to.equal(user2);
   })
   it('calculateAverageStepGoal should return average step goal for all users', function() {
-    expect(userRepository.calculateAverageStepGoal()).to.equal(10000);
+    expect(testRepository.calculateAverageStepGoal()).to.equal(10000);
   })
   it('calculateAverageSleepQuality should return average sleep quality for all users', function() {
     user1.sleepQualityAverage = 3.3;
     user2.sleepQualityAverage = 5;
     user3.sleepQualityAverage = 1;
-    expect(userRepository.calculateAverageSleepQuality()).to.equal(3.1);
+    expect(testRepository.calculateAverageSleepQuality()).to.equal(3.1);
   });
   it('should have a method that calculates friends average ounces of water', function() {
-    user1.ouncesRecord = [
-      {"2019/06/15": 1},
-      {"2019/06/15": 1},
-      {"2019/06/16": 5}
+    user1.ouncesRecord = [{
+        "2019/06/15": 1
+      },
+      {
+        "2019/06/15": 1
+      },
+      {
+        "2019/06/16": 5
+      }
     ]
-    user2.ouncesRecord = [
-      {"2019/06/15": 1},
-      {"2019/06/15": 1},
-      {"2019/06/16": 8}
+    user2.ouncesRecord = [{
+        "2019/06/15": 1
+      },
+      {
+        "2019/06/15": 1
+      },
+      {
+        "2019/06/16": 8
+      }
     ]
-    user3.ouncesRecord = [
-      {"2019/06/15": 1},
-      {"2019/06/15": 1},
-      {"2019/06/16": 4}
+    user3.ouncesRecord = [{
+        "2019/06/15": 1
+      },
+      {
+        "2019/06/15": 1
+      },
+      {
+        "2019/06/16": 4
+      }
     ]
-    expect(userRepository.calculateAverageDailyWater("2019/06/16")).to.equal(5)
+    expect(testRepository.calculateAverageDailyWater("2019/06/16")).to.equal(5)
   });
   it('should have a method that finds the best sleepers', function() {
     sleep1 = new Sleep({
       "userID": 1,
-      "date": "2019/06/16",
+      "date": "2019/06/15",
       "hoursSlept": 6.1,
       "sleepQuality": 1000
-    }, userRepository);
+    }, testRepository);
+
     sleep2 = new Sleep({
       "userID": 2,
       "date": "2019/06/15",
       "hoursSlept": 7.3,
       "sleepQuality": 500
-    }, userRepository);
+    }, testRepository);
+
     sleep3 = new Sleep({
       "userID": 3,
       "date": "2019/06/15",
       "hoursSlept": 9.3,
       "sleepQuality": 1.4
-    }, userRepository);
-    expect(userRepository.findBestSleepers("2019/06/16")).to.deep.equal([user1, user2]);
+    }, testRepository);
+    expect(testRepository.findBestSleepers("2019/06/16")).to.deep.equal([user1, user2]);
   });
-  it('should have a method that finds the longest sleepers', function() {
-    sleepData = [{
+
+
+  it.only('should have a method that finds the longest sleepers', function() {
+    let testRepository = new UserRepository();
+    sleep1 = new Sleep({
       "userID": 1,
       "date": "2019/06/15",
       "hoursSlept": 6.1,
       "sleepQuality": 100
-    }, {
+    }, testRepository);
+    sleep2 = new Sleep({
       "userID": 2,
       "date": "2019/06/15",
       "hoursSlept": 7.3,
       "sleepQuality": 1500
-    }, {
+    }, testRepository)
+    sleep3 = new Sleep({
       "userID": 3,
       "date": "2019/06/15",
       "hoursSlept": 9.3,
       "sleepQuality": 1.4
-    }];
-    expect(userRepository.getLongestSleepers("2019/06/15")).to.equal(3);
+    }, testRepository);
+    console.log("testRepository", testRepository);
+    console.log("users", testRepository.users);
+    expect(testRepository.getLongestSleepers("2019/06/15")).to.equal(3);
   });
+  //WE NEED A TEST REPOSITORY OR ELSE IT WILL BE TESTING
+  //FROM THE ACTUAL REPOSITORY DATA;
   it('should have a method that finds the worst sleepers', function() {
-    sleepData = [{
+    let testRepository = new UserRepository();
+    sleep1 = new Sleep({
       "userID": 1,
       "date": "2019/06/15",
       "hoursSlept": 6.1,
       "sleepQuality": 1000
-    }, {
+    }, testRepository);
+    sleep2 = new Sleep({
       "userID": 2,
       "date": "2019/06/15",
       "hoursSlept": 7.3,
       "sleepQuality": 500
-    }, {
+    }, testRepository);
+    sleep3 = new Sleep({
       "userID": 3,
       "date": "2019/06/15",
       "hoursSlept": 9.3,
       "sleepQuality": 1.4
-    }];
-    expect(userRepository.getWorstSleepers("2019/06/15")).to.equal(1);
+    }, testRepository);
+    console.log(testRepository);
+    expect(testRepository.getWorstSleepers("2019/06/15")).to.equal(3);
   });
   it('should have a method that calculates average number of stairs for users', function() {
-    user1.activityRecord = [{date: "2019/09/17", flightsOfStairs: 10}, {date: "2019/09/17", flightsOfStairs: 15}];
-    user2.activityRecord = [{date: "2019/09/16", flightsOfStairs: 8}, {date: "2019/09/17", flightsOfStairs: 4}];
-    expect(userRepository.calculateAverageStairs("2019/09/17")).to.equal(10);
+    user1.activityRecord = [{
+      date: "2019/09/17",
+      flightsOfStairs: 10
+    }, {
+      date: "2019/09/17",
+      flightsOfStairs: 15
+    }];
+    user2.activityRecord = [{
+      date: "2019/09/16",
+      flightsOfStairs: 8
+    }, {
+      date: "2019/09/17",
+      flightsOfStairs: 4
+    }];
+    expect(testRepository.calculateAverageStairs("2019/09/17")).to.equal(10);
   })
   it('should have a method that calculates average number of steps for users', function() {
-    user1.activityRecord = [{date: "2019/09/17", steps: 100}, {date: "2019/09/17", steps: 2000}];
-    user2.activityRecord = [{date: "2019/09/16", steps: 9820}, {date: "2019/09/17", steps: 234}];
-    expect(userRepository.calculateAverageSteps("2019/09/17")).to.equal(778);
+    user1.activityRecord = [{
+      date: "2019/09/17",
+      steps: 100
+    }, {
+      date: "2019/09/17",
+      steps: 2000
+    }];
+    user2.activityRecord = [{
+      date: "2019/09/16",
+      steps: 9820
+    }, {
+      date: "2019/09/17",
+      steps: 234
+    }];
+    expect(testRepository.calculateAverageSteps("2019/09/17")).to.equal(778);
   })
   it('should have a method that calculates average number of active minutes for users', function() {
-    user1.activityRecord = [{date: "2019/09/17", minutesActive: 100}, {date: "2019/09/17", minutesActive: 20}];
-    user2.activityRecord = [{date: "2019/09/16", minutesActive: 78}, {date: "2019/09/17", minutesActive: 12}];
-    expect(userRepository.calculateAverageMinutesActive("2019/09/17")).to.equal(44);
+    user1.activityRecord = [{
+      date: "2019/09/17",
+      minutesActive: 100
+    }, {
+      date: "2019/09/17",
+      minutesActive: 20
+    }];
+    user2.activityRecord = [{
+      date: "2019/09/16",
+      minutesActive: 78
+    }, {
+      date: "2019/09/17",
+      minutesActive: 12
+    }];
+    expect(testRepository.calculateAverageMinutesActive("2019/09/17")).to.equal(44);
   })
 });
