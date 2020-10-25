@@ -86,3 +86,5 @@ class ActivtyRepository {
     }
   }
 }
+
+export default ActivityRepository;

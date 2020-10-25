@@ -46,3 +46,5 @@ class SleepRepository() {
     }, 0) / 7).toFixed(1);
   }
 }
+
+export default SleepRepository;
