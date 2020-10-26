@@ -3,10 +3,6 @@ import './css/styles.scss';
 import './index.js';
 
 
-import fetchData from //fetch.js file to be created later//
-
-import UserRepository from './UserRepository';
-
 
 
 
