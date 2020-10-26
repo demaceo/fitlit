@@ -1,3 +1,7 @@
+import HydrationRepository from "./HydrationRepository";
+import ActivityRepository from "./ActivityRepository";
+import SleepRepository from "./SleepRepository"; 
+
  class User {
    constructor(userData) {
      this.id = userData.id;
