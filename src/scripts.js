@@ -2,13 +2,11 @@ import './css/base.scss';
 import './css/styles.scss';
 import './index.js';
 
-import userData from './data/users';
-import activityData from './data/activity';
-import sleepData from './data/sleep';
-import hydrationData from './data/hydration';
+
+import fetchData from //fetch.js file to be created later//
 
 import UserRepository from './UserRepository';
-import User from './User';
+
 
 
 
