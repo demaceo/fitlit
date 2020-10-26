@@ -1,10 +1,11 @@
 import './css/base.scss';
 import './css/styles.scss';
-import './index.js';
 
+import fetchData from '.fetchData';
+import UserRepository from '/UserRepository'
 
-
-
+let currentUser
+let todaysDate
 
 //*****************CLASS INSTANTIATIONS*****************
 function uploadData() {
@@ -16,7 +17,16 @@ function getRandomIndex(array){
   return Math.floor(Math.random() * array.length)
 }
 
-
+function getData() {
+  return fetchData()
+  .then((data) => {
+    todaysDate = moment().format('YYYY/MM/DD');
+    let userRepository = new UserRepository(data, todaysDate)
+    currentUser = userRepository.users[Math.floor(Math.random() * 50)]
+    console.log("this is the currentUser", currentUser)
+  })
+  .catch((err) => console.log(err.message))
+}
 
 
 //**********OLD INSTANTIATION CODE*************
