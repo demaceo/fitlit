@@ -29,8 +29,13 @@ class UserRepository {
       })
     })
   }
+
   linkActivity(users, rawActivityData) {
-    users.forEach((user) => {})
+    users.forEach(user => {
+      user.activityInfo.records = rawActivityData.filter(data => {
+        return data.userID === user.id
+      })
+    })
   }
   getUser(id) {
     return this.users.find(user => {
