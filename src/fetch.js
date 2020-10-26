@@ -24,7 +24,8 @@ function fetchData() {
   })
   .catch(err => console.log(err.message));
 
-  let activityData = fetch()
+  let activityData = fetch('https://fe-apps.herokuapp.com/api/v1/fitlit/1908/activity/activityData
+')
     .then(response => response.json())
     .then(data => {
       return data.activityData;
