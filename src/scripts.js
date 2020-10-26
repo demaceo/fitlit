@@ -9,9 +9,7 @@ import hydrationData from './data/hydration';
 
 import UserRepository from './UserRepository';
 import User from './User';
-import Activity from './Activity';
-import Hydration from './Hydration';
-import Sleep from './Sleep';
+
 
 
 //*****************CLASS INSTANTIATIONS*****************
