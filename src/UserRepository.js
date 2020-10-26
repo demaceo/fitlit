@@ -1,11 +1,41 @@
-import sleepData from './data/sleep';
-import hydrationData from './data/hydration';
-import activityData from './data/activity';
-import userData from './data/users';
+
+import User from './User'
 
 class UserRepository {
-  constructor(date, userData, activityData, hydrationData, sleepData) {
-    this.users = [];
+  constructor(rawData, todaysDate) {
+    this.users = this.linkData(rawData, todaysDate);
+  }
+
+  linkdata(rawData, todaysDate){
+    let instantiatedUsers = rawData.userData.map((rawUser) => new User(rawUser, todaysDate)
+      this.linkHydration(instantiedUsers, rawData.hydrationData);
+      this.linkSleep(instantiatedUsers, rawData.sleepData)
+      this.linkActivity(instantiatedUsers, rawData.activityData);
+  return instantiatedUsers;
+}
+
+  linkHydration(users, rawHydrationData) {
+    users.forEach(user => {
+      user.hydrationInfo.record = rawHydrationData.filter(data => {
+        return data.userID === user.id
+      })
+    })
+  }
+
+  linkSleep(users, rawSleepData) {
+    users.forEach(user => {
+      user.sleepInfo.record = rawSleepData.filter(data => {
+        return data.userID === user.id);
+      })
+    })
+  }
+
+  linkActivity(users, rawActivityData) {
+    users.forEach(user => {
+      user.activityInfo.record = rawActivityData.filter(data => {
+        return data.userID === user.id
+      })
+    })
   }
   getUser(id) {
     return this.users.find(user => {
