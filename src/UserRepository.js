@@ -4,7 +4,7 @@ import activityData from './data/activity';
 import userData from './data/users';
 
 class UserRepository {
-  constructor() {
+  constructor(date, userData, activityData, hydrationData, sleepData) {
     this.users = [];
   }
   getUser(id) {
