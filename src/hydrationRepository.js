@@ -1,28 +1,18 @@
 class HydrationRepository {
   constructor() {
     this.records = [];
-    // this.totalAverageOunces = 0;
-    // this.ouncesRecord = [];
-    // this.weeklyOunces = [];
   }
 
-  // updateAverageOunces(record) {
-  //   this.ouncesRecord.unshift(record);
-  //   if (this.ouncesRecord.length) {
-  //     this.totalAverageOunces = Math.round((record.numOunces + (this.totalAverageOunces * (this.ouncesRecord.length - 1))) / this.ouncesRecord.length);
-  //   } else {
-  //     this.totalAverageOunces = record.numOunces;
+  // addDailyOunces(userID, date, numOunces) {
+  //   let newData = {
+  //     "userID": userID.
+  //     "date": date,
+  //     "numOunces": numOunces
   //   }
+  //   this.records.push(newData)
   // }
-  addDailyOunces(userID, date, numOunces) {
-    this.records.push({
-      userID: userID.
-      date: date,
-      numOunces: numOunces
-    })
-  }
 
-  calculateUserAverageTotalOunces(userID) {
+  calculateAverageTotalOunces(userID) {
     let totalOunces = 0;
     let counter = 0;
     this.records.forEach(record => {
