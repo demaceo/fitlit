@@ -1,11 +1,6 @@
-class ActivtyRepository {
+class ActivityRepository {
   constructor() {
     this.record = [];
-    // this.activityRecord = [];
-    // this.accomplishedDays = [];
-    // this.trendingStepDays = [];
-    // this.trendingStairsDays = [];
-    // this.totalStepsThisWeek = 0;
   }
   calculateTotalStepsThisWeek(todayDate) {
     this.totalStepsThisWeek = (this.activityRecord.reduce((sum, activity) => {

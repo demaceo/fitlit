@@ -1,9 +1,5 @@
-class SleepRepository() {
+class SleepRepository {
   constructor() {
-      // this.hoursSleptAverage = 0;
-      // this.sleepQualityAverage = 0;
-      // this.sleepHoursRecord = [];
-      // this.sleepQualityRecord = [];
       this.record = [];
   }
 
