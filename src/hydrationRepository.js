@@ -37,7 +37,27 @@ class HydrationRepository {
   }
 
   calculateAverageWeeklyOunces(userID, date) {
-
+    let week = [];
+    let day = date;
+    this.records.forEach(record => {
+      if (record.userID === userID && record.date === date){
+        week.push({
+          `${date}`: calculateAverageDailyOunces(userID, date);
+        })
+        day++;
+      if (record.userID === userID && record.date === date)
+      }
+    }))
+  }
+  sumDailyOunces(userID, date){
+    let totalDailyOunces = 0;
+    this.records.forEach(record => {
+      if (record.userID === userID && record.date === date) {
+        totalDailyOunces += record.numOunces
+      }
+    })
+    return totalDailyOunces;
+  }
   }
 }
 
