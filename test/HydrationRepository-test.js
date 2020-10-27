@@ -5,14 +5,10 @@ import HydrationRepository from '../src/HydrationRepository';
 import User from '../src/User';
 
 describe.only('HydrationRepository', function() {
-  let todaysDate;
+  // let todaysDate;
   let hydration1;
   let hydration2;
   let hydration3;
-  let hydration4;
-  let hydration5;
-  let hydration6;
-  let hydration7;
   let mockHydrationData = [];
   let mockHydrationRepo;
   beforeEach(() => {
@@ -22,38 +18,33 @@ describe.only('HydrationRepository', function() {
       "numOunces": 87
     };
     hydration2 = {
-      "userID": 7,
+      "userID": 6,
       "date": "2019/06/15",
       "numOunces": 94
     };
     hydration3 = {
-      "userID": 8,
+      "userID": 7,
       "date": "2019/06/15",
       "numOunces": 84
     };
     hydration4 = {
-      "userID": 9,
+      "userID": 6,
       "date": "2019/06/15",
-      "numOunces": 39
+      "numOunces": 78
     };
     hydration5 = {
-      "userID": 10,
-      "date": "2019/06/15",
-      "numOunces": 75
+      "userID": 6,
+      "date": "2019/06/16",
+      "numOunces": 49
     };
     hydration6 = {
-      "userID": 11,
-      "date": "2019/06/15",
-      "numOunces": 51
+      "userID": 7,
+      "date": "2019/06/30",
+      "numOunces": 48
     };
-    hydration7 = {
-      "userID": 12,
-      "date": "2019/06/15",
-      "numOunces": 100
-    }
-    todaysDate = 11 / 21 / 2020;
-    mockHydrationRepo = new HydrationRepository(todaysDate);
-    mockHydrationData = [hydration1, hydration2, hydration3, hydration4, hydration5, hydration6, hydration7];
+    // todaysDate = "2019/06/15";
+    mockHydrationRepo = new HydrationRepository();
+    mockHydrationData = [hydration1, hydration2, hydration3, hydration4, hydration5, hydration6];
   })
   it('should be a function', function() {
     expect(HydrationRepository).to.be.a('function');
@@ -70,16 +61,27 @@ describe.only('HydrationRepository', function() {
   it('should have a number of ounces', function() {
     expect(hydration1.numOunces).to.equal(87);
   });
-  it('should be able to update the average amount of ounces', function() {
-    mockHydrationRepo.updateAverageOunces("2019/06/15", 12);
-    expect(mockHydrationRepo.ouncesAverage).to.equal(12);
+  it('should be able to calculate the average amount of all total ounces for a user', function() {
+    expect(mockHydrationRepo.calculateTotalAverageOunces(6)).to.equal(77);
   });
   it('should be able to add daily ounces', function() {
-    mockHydrationRepo.updateAverageOunces("2019/06/15", 12);
-    expect(mockHydrationRepo.addDailyOunces("2019/06/15")).to.equal(12);
+    mockHydrationRepo.addDailyOunces(12, "2019/06/15", 100);
+    expect(mockHydrationRepo[-1].userID).to.equal(12);
   });
-  it('should hold all individual entries in an array', function() {
+  it.skip('should hold all individual entries in an array', function() {
     mockHydrationRepo.records.push(...mockHydrationData)
-    expect(mockHydrationRepo.records.length).to.deep.equal(7);
+    expect(mockHydrationRepo.records.length).to.deep.equal(6);
   })
+  it('should average a user\'s daily ounces consumed', function() {
+    // mockHydrationRepo.
+    expect(mockHydrationRepo.calculateAverageDailyOunces(6, "2019/06/15").to.equal(86.3))
+  })
+  // it('should calculate the amount of ounces consumed by a user for any given day', function() {
+  //
+  //   expect(mockHydrationRepo.sumDailyOunces(6, "2019/06/15")).to.equal(126);
+  // })
+  // it('should average a user\'s daily ounces consumed', function() {
+  //
+  //   expect()
+  // })
 })
