@@ -1,6 +1,6 @@
 class ActivityRepository {
   constructor() {
-    this.record = [];
+    this.records = [];
   }
 
   calculateTotalStepsThisWeek(todayDate) {

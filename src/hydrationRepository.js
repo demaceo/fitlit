@@ -1,6 +1,15 @@
 class HydrationRepository {
   constructor() {
     this.records = [];
+
+
+  }
+  updateAverageOunces(date, amount) {
+
+  }
+  addDailyOunces(date) {
+    
+
   }
 
   // addDailyOunces(userID, date, numOunces) {
@@ -57,7 +66,6 @@ class HydrationRepository {
       }
     })
     return totalDailyOunces;
-  }
   }
 }
 
