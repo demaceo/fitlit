@@ -161,4 +161,8 @@ describe.only('ActivityRepository', function() {
 
     expect(milesWalked).to.equal()
  })
+
+
+ 
 });
+
