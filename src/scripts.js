@@ -1,10 +1,9 @@
 import './css/base.scss';
 import './css/styles.scss';
-import './index.js';
 
 
-import fetchData from //fetch.js file to be created later//
-
+import domUpdates from './domUpdates';
+import fetchData from './fetch'; 
 import UserRepository from './UserRepository';
 
 
