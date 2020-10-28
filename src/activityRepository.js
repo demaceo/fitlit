@@ -59,6 +59,7 @@ class ActivityRepository {
       return sum;
     }, 0) / 7).toFixed(1);
   }
+
   findTrendingStepDays() {
     let positiveDays = [];
     for (var i = 0; i < this.record.length; i++) {
@@ -70,6 +71,7 @@ class ActivityRepository {
       }
     }
   }
+
   findTrendingStairsDays() {
     let positiveDays = [];
     for (var i = 0; i < this.record.length; i++) {
@@ -81,6 +83,7 @@ class ActivityRepository {
       }
     }
   }
+
   userMilesWalked(user, date){
     let todaysStepsTaken = this.record.find((record) => {
       record.date === date
@@ -89,6 +92,73 @@ class ActivityRepository {
   let milesWalked = (todaysStepsTaken * user.strideLength)/5280 
   return milesWalked
  };
+
+ const minutesActivePerWeek = (todaysDate) => {
+  let week = this.records.//date.slice//(-7, -1)
+  let result = user.activityInfo.records.find(record => {
+    if (record.date === todaysDate){
+      let average = week.reduce((acc, currVal) => {
+        acc += currVal.activityInfo.records.minutesActive
+        return acc/7
+      }, 0 )
+      return average
+    }
+  })
+  return result
+}
+
+const minActive = (todaysDate) => {
+  let result = user.activityInfo.records.find(record => {
+    if (record.date === todaysDate){
+      return record.minutesActive
+    }
+  });
+  return result
+}
+
+const checkGoal = (todaysDate) => {
+  let result = user.activityInfo.records.find(record => {
+    if (record.date === todaysDate && record.minutesActive >= user.dailyStepGoal){
+      return true
+    }
+  });
+  return result;
+}
+
+const getMetStepGoals = () => {
+  let resultsArr = []
+  user.activityInfo.records.forEach(record => {
+    if(record.minutesActive >= user.dailyStepGoal){
+      resultsArr.push(record)
+    }
+  });
+  return resultsArr;
+}
+
+const allTimeStairs = () => {
+  let newArr = []
+newArr = user.activityInfo.records.sort((a,b) => {
+  b.flightsOfStairs - a.flightsOfStairs
+})
+return newArr[0];
+}
+
+const latestSteps = () => {
+  let latestRecord = user.activityInfo.records.slice(-1)
+  return latestRecord.numSteps
+  }
+
+const latestMinutesActive = () => {
+let latestRecord = user.activityInfo.records.slice(-1)
+  return latestRecord.minutesActive
+  }
+const latestMilesWalked = () => {
+let latestRecord = user.activityInfo.records.slice(-1)
+
+return ` you have recently ${2000 / latestRecord.steps} miles`
+  }
+
+const 
 }
 
 export default ActivityRepository;
