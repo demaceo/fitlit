@@ -1,6 +1,4 @@
-import {
-  expect
-} from 'chai'
+import { expect } from 'chai'
 import HydrationRepository from '../src/HydrationRepository';
 import User from '../src/User';
 
