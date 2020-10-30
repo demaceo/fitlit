@@ -39,9 +39,10 @@ describe.only('HydrationRepository', function() {
       'numOunces': 48
     };
     // todaysDate = “2019/06/15”;
+
     mockHydrationRepo = new HydrationRepository();
     mockHydrationData = [hydration1, hydration2, hydration3, hydration4, hydration5, hydration6];
-  })
+  });
   it('should be a function', function() {
     expect(HydrationRepository).to.be.a('function');
   });
@@ -61,6 +62,7 @@ describe.only('HydrationRepository', function() {
     expect(mockHydrationRepo.calculateTotalAverageOunces(6)).to.equal(77);
   });
   it('should be able to add daily ounces', function() {
+
     mockHydrationRepo.addDailyOunces(12, '2019/06/15', 100);
     expect(mockHydrationRepo[-1].userID).to.equal(12);
   });
@@ -68,8 +70,17 @@ describe.only('HydrationRepository', function() {
     mockHydrationRepo.records.push(...mockHydrationData)
     expect(mockHydrationRepo.records.length).to.deep.equal(6);
   })
+
   it('should average a user\‘s daily ounces consumed', function() {
     // mockHydrationRepo.
     expect(mockHydrationRepo.calculateAverageDailyOunces(6, '2019/06/15').to.equal(86.3))
   })
+  // it('should calculate the amount of ounces consumed by a user for any given day', function() {
+  //
+  //   expect(mockHydrationRepo.sumDailyOunces(6, "2019/06/15")).to.equal(126);
+  // })
+  // it('should average a user\'s daily ounces consumed', function() {
+  //
+  //   expect()
+  // })
 })

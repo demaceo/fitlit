@@ -134,8 +134,7 @@ describe.only('ActivityRepository', function() {
       }
     ]
   })
-})
-;
+});
   it('should be a function', function() {
     expect(ActivityRepository).to.be.a('function');
   });
