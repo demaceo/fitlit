@@ -2,84 +2,62 @@ class ActivityRepository {
   constructor() {
     this.records = [];
   }
-  calculateTotalStepsThisWeek(todayDate) {
-    this.totalStepsThisWeek = (this.activityRecord.reduce((sum, activity) => {
-      let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
-      if (index <= this.activityRecord.indexOf(activity) && this.activityRecord.indexOf(activity) <= (index + 6)) {
-        sum += activity.steps;
-      }
-      return sum;
-    }, 0));
-  }
-
-  updateActivities(activity) {
-    this.activityRecord.unshift(activity);
-    if (activity.numSteps >= this.dailyStepGoal) {
-      this.accomplishedDays.unshift(activity.date);
+minutesActivePerWeek(todaysDate){
+  let week = this.records.date.slice(-7, -1)
+  let result = user.activityInfo.records.find(record => {
+    if (record.date === todaysDate){
+      let average = week.reduce((acc, currVal) => {
+        acc += currVal.activityInfo.records.minutesActive
+        return acc/7
+      }, 0 )
+      return average
     }
-  }
-  findClimbingRecord() {
-    return this.activityRecord.sort((a, b) => {
-      return b.flightsOfStairs - a.flightsOfStairs;
-    })[0].flightsOfStairs;
-  }
-  calculateDailyCalories(date) {
-    let totalMinutes = this.activityRecord.filter(activity => {
-      return activity.date === date
-    }).reduce((sumMinutes, activity) => {
-      return sumMinutes += activity.minutesActive
-    }, 0);
-    return Math.round(totalMinutes * 7.6);
-  }
-  calculateAverageMinutesActiveThisWeek(todayDate) {
-    return (this.activityRecord.reduce((sum, activity) => {
-      let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
-      if (index <= this.activityRecord.indexOf(activity) && this.activityRecord.indexOf(activity) <= (index + 6)) {
-        sum += activity.minutesActive;
-      }
-      return sum;
-    }, 0) / 7).toFixed(0);
-  }
-  calculateAverageStepsThisWeek(todayDate) {
-    return (this.activityRecord.reduce((sum, activity) => {
-      let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
-      if (index <= this.activityRecord.indexOf(activity) && this.activityRecord.indexOf(activity) <= (index + 6)) {
-        sum += activity.steps;
-      }
-      return sum;
-    }, 0) / 7).toFixed(0);
-  }
-  calculateAverageFlightsThisWeek(todayDate) {
-    return (this.activityRecord.reduce((sum, activity) => {
-      let index = this.activityRecord.indexOf(this.activityRecord.find(activity => activity.date === todayDate));
-      if (index <= this.activityRecord.indexOf(activity) && this.activityRecord.indexOf(activity) <= (index + 6)) {
-        sum += activity.flightsOfStairs;
-      }
-      return sum;
-    }, 0) / 7).toFixed(1);
-  }
-  findTrendingStepDays() {
-    let positiveDays = [];
-    for (var i = 0; i < this.activityRecord.length; i++) {
-      if (this.activityRecord[i + 1] && this.activityRecord[i].steps > this.activityRecord[i + 1].steps) {
-        positiveDays.unshift(this.activityRecord[i].date);
-      } else if (positiveDays.length > 2) {
-        this.trendingStepDays.push(`Your most recent positive step streak was ${positiveDays[0]} - ${positiveDays[positiveDays.length - 1]}!`);
-        positiveDays = [];
-      }
+  })
+  return result
+}
+minActive(todaysDate){
+  let result = user.activityInfo.records.find(record => {
+    if (record.date === todaysDate){
+      return record.minutesActive
     }
-  }
-  findTrendingStairsDays() {
-    let positiveDays = [];
-    for (var i = 0; i < this.activityRecord.length; i++) {
-      if (this.activityRecord[i + 1] && this.activityRecord[i].flightsOfStairs > this.activityRecord[i + 1].flightsOfStairs) {
-        positiveDays.unshift(this.activityRecord[i].date);
-      } else if (positiveDays.length > 2) {
-        this.trendingStairsDays.push(`Your most recent positive climbing streak was ${positiveDays[0]} - ${positiveDays[positiveDays.length - 1]}!`);
-        positiveDays = [];
-      }
+  });
+  return result
+}
+checkGoal(todaysDate){
+  let result = user.activityInfo.records.find(record => {
+    if (record.date === todaysDate && record.minutesActive >= user.dailyStepGoal){
+      return true
     }
+  });
+  return result;
+}
+getMetStepGoals(){
+  let resultsArr = []
+  user.activityInfo.records.forEach(record => {
+    if(record.minutesActive >= user.dailyStepGoal){
+      resultsArr.push(record)
+    }
+  });
+  return resultsArr;
+}
+allTimeStairs(){
+  let newArr = []
+newArr = user.activityInfo.records.sort((a,b) => {
+  b.flightsOfStairs - a.flightsOfStairs
+})
+return newArr[0];
+}
+latestSteps(){
+  let latestRecord = user.activityInfo.records.slice(-1)
+  return latestRecord.numSteps
+  }
+latestMinutesActive(){
+let latestRecord = user.activityInfo.records.slice(-1)
+  return latestRecord.minutesActive
+  }
+latestMilesWalked(){
+let latestRecord = user.activityInfo.records.slice(-1)
+return ` you have recently ${2000 / latestRecord.steps} miles`
   }
 }
-
 export default ActivityRepository;
