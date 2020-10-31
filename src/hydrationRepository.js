@@ -8,7 +8,7 @@ class HydrationRepository {
     return targetDay
   }
 
-  calculateAverageTotalOunces() {
+  calculateTotalAverageOunces() {
     let totalOunces = 0;
     let counter = 0;
     this.records.forEach(record => {
@@ -19,6 +19,7 @@ class HydrationRepository {
     })
     return totalOunces = totalOunces / counter;
   }
+
   calculateAverageDailyOunces(date) {
     let averageDailyOunces = 0;
     let counter = 0;

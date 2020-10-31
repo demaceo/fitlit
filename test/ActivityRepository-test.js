@@ -152,7 +152,7 @@ describe('ActivityRepository', function() {
     expect(mockActivityRepo.record).to.be.an.instanceof(Array);
   })
     //total steps * user stride length / 5280
-  it.only('should calculate miles walked per day', function () {
+  it('should calculate miles walked per day', function () {
     mockActivityRepo.record.push(...mockRawData.activityData)
     ActivityRepository.userMilesWalked(mockActivityRepo.record.push)
     expect(milesWalked).to.equal()
