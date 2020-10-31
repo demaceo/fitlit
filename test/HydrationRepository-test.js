@@ -75,18 +75,15 @@ describe.only('HydrationRepository', function() {
     expect(hydration1.numOunces).to.equal(87);
   });
   it('should be able to calculate the average amount of all total ounces for a user', function() {
-    expect(mockHydrationRepo.calculateTotalAverageOunces()).to.equal(77);
+    mockHydrationRepo.records.push(...mockRawData)
+    expect(mockHydrationRepo.getAverageOuncesOverall()).to.equal(72.57);
   });
   it('should hold all individual entries in an array', function() {
     mockHydrationRepo.records.push(...mockRawData)
     expect(mockHydrationRepo.records.length).to.deep.equal(7);
   })
-  it('should average a user\‘s daily ounces consumed', function() {
-    mockHydrationRepo.records.push(...mockRawData)
-    expect(mockHydrationRepo.calculateAverageDailyOunces().to.equal(86.3))
-  });
   it('should get the weeks average of ounces', function() {
     mockHydrationRepo.records.push(...mockRawData);
-    expect(mockHydrationRepo.calculateWeeklyAvgOunces()).to.equal(93)
+    expect(mockHydrationRepo.calculateWeeklyAvgOunces()).to.equal(63)
   });
 })

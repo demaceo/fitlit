@@ -3,18 +3,6 @@ class HydrationRepository {
     this.records = [];
   }
 
-  calculateTotalAverageOunces() {
-    let totalOunces = 0;
-    let counter = 0;
-    this.records.forEach(record => {
-      if (record.userID === userID) {
-        totalOunces += record.numOunces;
-        counter++
-      }
-    })
-    return totalOunces = totalOunces / counter;
-  }
-
   getOuncesbyDay(date){
     let targetDay = this.records.find(entry => entry.date === date);
     return targetDay
@@ -25,6 +13,14 @@ class HydrationRepository {
     return week.map(day => {
       return day.numOunces;
     });
+  }
+  getAverageOuncesOverall() {
+    let sumOunces = this.records.reduce((sum, entry) => {
+      sum += entry.numOunces;
+      return sum;
+    }, 0);
+    let overallAverageOunces = (sumOunces / this.records.length).toFixed(2)
+    return Number(overallAverageOunces)
   }
   calculateWeeklyAvgOunces(date){
     let totalWeeklyOunces = this.records.reduce((sum, entry) => {
@@ -39,15 +35,6 @@ class HydrationRepository {
      return Number(averageWeeklyOunces);
    }
 
-  sumDailyOunces(userID, date){
-    let totalDailyOunces = 0;
-    this.records.forEach(record => {
-      if (record.userID === userID && record.date === date) {
-        totalDailyOunces += record.numOunces
-      }
-    })
-    return totalDailyOunces;
-  }
   addHydrationData(input) {
     let foundEntry = this.records.find(record => record.date === input.date);
     if (foundEntry) {
