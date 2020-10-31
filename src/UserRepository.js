@@ -7,10 +7,12 @@ class UserRepository {
   }
 
   linkdata(rawData, todaysDate){
-    let instantiatedUsers = rawData.userData.map((rawUser) => new User(rawUser, todaysDate)
-      this.linkHydration(instantiedUsers, rawData.hydrationData);
+    let instantiatedUsers = rawData.userData.map((rawUser) => {
+      new User(rawUser, todaysDate);
+      this.linkHydration(instantiatedUsers, rawData.hydrationData);
       this.linkSleep(instantiatedUsers, rawData.sleepData)
       this.linkActivity(instantiatedUsers, rawData.activityData);
+    })
   return instantiatedUsers;
 }
 
@@ -25,7 +27,7 @@ class UserRepository {
   linkSleep(users, rawSleepData) {
     users.forEach(user => {
       user.sleepInfo.record = rawSleepData.filter(data => {
-        return data.userID === user.id);
+        return data.userID === user.id
       })
     })
   }
