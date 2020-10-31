@@ -1,8 +1,6 @@
 import { expect } from 'chai'
 import ActivityRepository from '../src/ActivityRepository';
 import User from '../src/User';
-
-
 describe.only('ActivityRepository', function() {
   let activity1;
   let activity2;
@@ -12,11 +10,10 @@ describe.only('ActivityRepository', function() {
   let activity6;
   let activity7;
   let mockActivityRepo;
-  let mockRawData; 
-  let todaysDate; 
+  let mockRawData;
+  let todaysDate;
   let activityData;
-  let user; 
-
+  let user;
    beforeEach(() => {
     activity1 = {
       userID: 19,
@@ -77,10 +74,9 @@ describe.only('ActivityRepository', function() {
     }
   ],
     activityData: [activity1, activity2, activity3, activity4, activity5, activity6, activity7]},
-    todaysDate = '06/15/2019', 
+    todaysDate = '06/15/2019',
     mockActivityRepo = new ActivityRepository(todaysDate),
     user = new User ({
-
     id: 19,
     name: "Wilburn Collins",
     address: "543 Keeling Road, Schummside ID 47123-6269",
@@ -88,7 +84,7 @@ describe.only('ActivityRepository', function() {
     strideLength: 3.3,
     dailyStepGoal: 8000,
     friends: [30, 43, 22, 39]
-  }, 
+  },
     hydrationInfo = {
       record: [
         {
@@ -101,7 +97,7 @@ describe.only('ActivityRepository', function() {
           "date": "2019/06/16",
           "numOunces": 73
         }
-      ], 
+      ],
       //averageOuncesAllTime: NaN;
     },
     sleepInfo = {
@@ -121,7 +117,7 @@ describe.only('ActivityRepository', function() {
       ],
     },
     activityInfo = {
-      record: [ 
+      record: [
         {
         "userID": 19,
         "date": "2019/06/22",
@@ -138,31 +134,20 @@ describe.only('ActivityRepository', function() {
       }
     ]
   })
-})
-; 
-
-
+});
   it('should be a function', function() {
     expect(ActivityRepository).to.be.a('function');
   });
-
   it('should be an instance of activity', function() {
     expect(mockActivityRepo).to.be.an.instanceof(ActivityRepository);
   });
-
   it('should have a record', function() {
     expect(mockActivityRepo.record).to.be.an.instanceof(Array);
   })
-
     //total steps * user stride length / 5280
   it.only('should calculate miles walked per day', function () {
     mockActivityRepo.record.push(...mockRawData.activityData)
     ActivityRepository.userMilesWalked(mockActivityRepo.record.push)
-
     expect(milesWalked).to.equal()
  })
-
-
- 
 });
-
