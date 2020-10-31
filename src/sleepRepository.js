@@ -1,23 +1,23 @@
 class SleepRepository {
   constructor() {
-    this.record = [];
+    this.records = [];
     this.weeklyRecords = [];
   }
   // For a user (identified by their userID), the average number of hours slept per day
   averageTotalHoursSlept() {
     let totalAverage = 0;
-    this.record.forEach(record => {
+    this.records.forEach(record => {
       totalAverage += record.hoursSlept
     });
-    return totalAverage = totalAverage / this.record.length
+    return totalAverage = totalAverage / this.records.length
   }
   // For a user, their average sleep quality per day over all time
   averageTotalSleepQuality() {
     let totalAverage = 0;
-    this.record.forEach(record => {
+    this.records.forEach(record => {
       totalAverage += record.sleepQuality
     });
-    return totalAverage = totalAverage / this.record.length
+    return totalAverage = totalAverage / this.records.length
   }
   // For a user, how many hours they slept for a specific day (identified by a date)
   findHoursSleptOnDate(date) {
@@ -37,7 +37,7 @@ class SleepRepository {
   // }
   // For a user, their sleep quality for a specific day (identified by a date)
   findSleepQualityOnDate(date) {
-    this.record.find(record => {
+    this.records.find(record => {
       if (record.date === date) {
         return record.sleepQuality
       }
@@ -46,7 +46,7 @@ class SleepRepository {
   // For a user, how many hours slept each day over the course of a given week (7 days)
   //- you should be able to calculate this for any week, not just the latest week
   determineWeeklySchedule() {
-    let mockRecords = this.record;
+    let mockRecords = this.records;
     let weekCounter = 0;
     mockRecords.filter(record => {
       let week = mockRecords.slice(0, 7);
@@ -99,10 +99,10 @@ class SleepRepository {
   // For all users, the average sleep quality
   averageTotalSleepQuality() {
     let totalAverage = 0;
-    this.record.forEach(record => {
+    this.records.forEach(record => {
       totalAverage += record.sleepQuality
     });
-    return totalAverage = totalAverage / this.record.length
+    return totalAverage = totalAverage / this.records.length
   }
   // Find all users who average a sleep quality greater than 3 for a given week (7 days)
   //- you should be able to calculate this for any week, not just the latest week

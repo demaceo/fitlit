@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import ActivityRepository from '../src/ActivityRepository';
 import User from '../src/User';
-describe.only('ActivityRepository', function() {
+describe('ActivityRepository', function() {
   let activity1;
   let activity2;
   let activity3;
@@ -14,6 +14,10 @@ describe.only('ActivityRepository', function() {
   let todaysDate;
   let activityData;
   let user;
+  let hydrationInfo;
+  let sleepInfo;
+  let activityInfo;
+
    beforeEach(() => {
     activity1 = {
       userID: 19,
@@ -64,6 +68,8 @@ describe.only('ActivityRepository', function() {
       minutesActive: 132,
       flightsOfStairs: 24
     },
+
+
     mockRawData = { userData: [ {id: 19,
       name: "Wilburn Collins",
       address: "543 Keeling Road, Schummside ID 47123-6269",
@@ -73,8 +79,10 @@ describe.only('ActivityRepository', function() {
       friends: [ 30, 43, 22, 39 ]
     }
   ],
+    sleepData: [{userID: 'test'}],
+    hydrationData: [{userID: 'test'}],
     activityData: [activity1, activity2, activity3, activity4, activity5, activity6, activity7]},
-    todaysDate = '06/15/2019',
+    todaysDate = '2019/06/15',
     mockActivityRepo = new ActivityRepository(todaysDate),
     user = new User ({
     id: 19,
@@ -85,8 +93,8 @@ describe.only('ActivityRepository', function() {
     dailyStepGoal: 8000,
     friends: [30, 43, 22, 39]
   },
-    hydrationInfo = {
-      record: [
+    hydrationInfo: {
+      records: [
         {
           "userID": 19,
           "date": "2019/06/15",
@@ -100,8 +108,8 @@ describe.only('ActivityRepository', function() {
       ],
       //averageOuncesAllTime: NaN;
     },
-    sleepInfo = {
-      record: [
+    sleepInfo: {
+      records: [
         {
           "userID": 19,
           "date": "2019/06/16",
@@ -116,8 +124,8 @@ describe.only('ActivityRepository', function() {
         },
       ],
     },
-    activityInfo = {
-      record: [
+    activityInfo: {
+      records: [
         {
         "userID": 19,
         "date": "2019/06/22",

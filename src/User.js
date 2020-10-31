@@ -1,9 +1,9 @@
 import HydrationRepository from "./HydrationRepository";
 import ActivityRepository from "./ActivityRepository";
-import SleepRepository from "./SleepRepository"; 
+import SleepRepository from "./SleepRepository";
 
  class User {
-   constructor(userData) {
+   constructor(userData, date) {
      this.id = userData.id;
      this.name = userData.name;
      this.address = userData.address;
