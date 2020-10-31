@@ -141,7 +141,7 @@ describe('UserRepository', function() {
   testRepository = new UserRepository(rawData, todaysDate)
 });
 
-it.only('should match each hydration data point with appropriate user', function() {
+  it('should match each hydration data point with appropriate user', function() {
     testRepository.linkData(rawData, todaysDate);
     console.log(testRepository.users[0])
     expect(testRepository.users[0].hydrationInfo.records.length).to.deep.equal(2);

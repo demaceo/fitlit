@@ -38,10 +38,9 @@ describe.only('HydrationRepository', function() {
       'date': '2019/06/30',
       'numOunces': 48
     };
-    // todaysDate = “2019/06/15”;
-
-    mockHydrationRepo = new HydrationRepository();
-    mockHydrationData = [hydration1, hydration2, hydration3, hydration4, hydration5, hydration6];
+    todaysDate = '2019/06/15';
+    mockHydrationRepo = new HydrationRepository(todaysDate);
+    mockRawData = [hydration1, hydration2, hydration3, hydration4, hydration5, hydration6];
   });
   it('should be a function', function() {
     expect(HydrationRepository).to.be.a('function');

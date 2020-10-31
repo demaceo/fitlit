@@ -2,15 +2,13 @@ class HydrationRepository {
   constructor() {
     this.records = [];
   }
-  // addDailyOunces(userID, date, numOunces) {
-  //   let newData = {
-  //     “userID”: userID,
-  //     “date”: date,
-  //     “numOunces”: numOunces
-  //   }
-  //   this.records.push(newData)
 
-  calculateAverageTotalOunces(userID) {
+  getOuncesbyDay(date){
+    let targetDay = this.records.find(entry => entry.date === date);
+    return targetDay
+  }
+
+  calculateAverageTotalOunces() {
     let totalOunces = 0;
     let counter = 0;
     this.records.forEach(record => {
@@ -21,7 +19,7 @@ class HydrationRepository {
     })
     return totalOunces = totalOunces / counter;
   }
-  calculateAverageDailyOunces(userID, date) {
+  calculateAverageDailyOunces(date) {
     let averageDailyOunces = 0;
     let counter = 0;
     this.records.forEach(record => {
@@ -32,18 +30,7 @@ class HydrationRepository {
     })
     return averageDailyOunces = averageDailyOunces / counter;
   }
-  // calculateAverageWeeklyOunces(userID, date) {
-  //   let week = [];
-  //   let day = date;
-  //   this.records.forEach(record => {
-  //     if (record.userID === userID && record.date === date){
-  //       week.push(`{
-  //         ${date}: calculateAverageDailyOunces(userID, date);
-  //       }`)}
-  //       day++;
-  //     if (record.userID === userID && record.date === date){
-  //   })
-  // }
+
   sumDailyOunces(userID, date){
     let totalDailyOunces = 0;
     this.records.forEach(record => {
@@ -52,6 +39,13 @@ class HydrationRepository {
       }
     })
     return totalDailyOunces;
+  }
+
+  calculateWeeksDailyOunces() {
+    let week = this.records.slice(-7, -1);
+    return week.map(day => {
+      return day.numOunces;
+    });
   }
 }
 export default HydrationRepository;
