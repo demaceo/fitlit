@@ -133,7 +133,7 @@ function getData() {
 //
 // function showDropdown() {
 //   userInfoDropdown.classList.toggle('hide');
-}
+
 
 //*****************EVENT LISTENERS*****************************
 
