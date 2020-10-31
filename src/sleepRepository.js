@@ -1,4 +1,4 @@
-class SleepRepository() {
+class SleepRepository {
   constructor() {
     this.record = [];
     this.weeklyRecords = [];
