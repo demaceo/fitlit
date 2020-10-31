@@ -68,8 +68,6 @@ describe('ActivityRepository', function() {
       minutesActive: 132,
       flightsOfStairs: 24
     },
-
-
     mockRawData = { userData: [ {id: 19,
       name: "Wilburn Collins",
       address: "543 Keeling Road, Schummside ID 47123-6269",
@@ -91,8 +89,7 @@ describe('ActivityRepository', function() {
     email: "Blake27@gmail.com",
     strideLength: 3.3,
     dailyStepGoal: 8000,
-    friends: [30, 43, 22, 39]
-  },
+    friends: [30, 43, 22, 39],
     hydrationInfo: {
       records: [
         {
@@ -139,10 +136,12 @@ describe('ActivityRepository', function() {
         "numSteps": 12226,
         "minutesActive": 247,
         "flightsOfStairs": 27
-      }
-    ]
+        },
+      ],
+    },
   })
 });
+
   it('should be a function', function() {
     expect(ActivityRepository).to.be.a('function');
   });
