@@ -23,7 +23,7 @@ let latestRecord = user.activityInfo.records.slice(-1)
 return ` you have recently ${2000 / latestRecord.steps} miles`
   }
  userMilesWalked(user, date){
-    let todaysStepsTaken = this.record.find((record) => {
+    let todaysStepsTaken = this.records.find((record) => {
       record.date === date
       return record.numSteps
   });
