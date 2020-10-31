@@ -18,7 +18,7 @@ class UserRepository {
 
   linkHydration(users, rawHydrationData) {
     users.forEach(user => {
-      user.hydrationInfo.record = rawHydrationData.filter(data => {
+      user.hydrationInfo.records = rawHydrationData.filter(data => {
         return data.userID === user.id
       })
     })
@@ -26,7 +26,7 @@ class UserRepository {
 
   linkSleep(users, rawSleepData) {
     users.forEach(user => {
-      user.sleepInfo.record = rawSleepData.filter(data => {
+      user.sleepInfo.records = rawSleepData.filter(data => {
         return data.userID === user.id
       })
     })
@@ -34,7 +34,7 @@ class UserRepository {
 
   linkActivity(users, rawActivityData) {
     users.forEach(user => {
-      user.activityInfo.record = rawActivityData.filter(data => {
+      user.activityInfo.records = rawActivityData.filter(data => {
         return data.userID === user.id
       })
     })
