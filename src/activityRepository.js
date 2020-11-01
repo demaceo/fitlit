@@ -14,35 +14,39 @@ latestSteps(){
   let latestRecord = user.activityInfo.records.slice(-1)
   return latestRecord.numSteps
   }
+
 latestMinutesActive(){
 let latestRecord = user.activityInfo.records.slice(-1)
   return latestRecord.minutesActive
-  }
+  };
+
 latestMilesWalked(){
 let latestRecord = user.activityInfo.records.slice(-1)
 return ` you have recently ${2000 / latestRecord.steps} miles`
-  }
+  };
+
  userMilesWalked(user, date){
-    let todaysStepsTaken = this.records.find((record) => {
-      record.date === date
-      return record.numSteps
+    let matchingRecord = this.records.find((record) => {
+      return record.date === date 
   });
-  let milesWalked = (todaysStepsTaken * user.strideLength)/5280
+  
+  let milesWalked = (matchingRecord.numSteps  * user.strideLength)/5280
   return milesWalked
  };
+
+
  minutesActivePerWeek(todaysDate) {
-  let week = this.records//date.slice//(-7, -1)
-  let result = user.activityInfo.records.find(record => {
-    if (record.date === todaysDate){
-      let average = week.reduce((acc, currVal) => {
-        acc += currVal.activityInfo.records.minutesActive
-        return acc/7
-      }, 0 )
-      return average
-    }
-  })
-  return result
-}
+   let totalWeeklyMinsActive = this.records.reduce((totalActive, entry) => {
+     let todaysEntry = this.records.find(entry =>  entry.date === todaysDate)
+        let index = this.records.indexOf(todaysEntry)
+        if (index <= this.records.indexOf(entry) && this.records.indexOf(entry) <= (index + 6)){
+          totalActive += entry.minutesActive
+   }
+   return totalActive / 7;
+  }, 0)
+};
+
+
  minActive(todaysDate){
   let result = user.activityInfo.records.find(record => {
     if (record.date === todaysDate){
@@ -61,15 +65,20 @@ return ` you have recently ${2000 / latestRecord.steps} miles`
   return result;
 }
 
- getMetStepGoals(){
-  let resultsArr = []
-  user.activityInfo.records.forEach(record => {
-    if(record.minutesActive >= user.dailyStepGoal){
-      resultsArr.push(record)
-    }
-  });
-  return resultsArr;
-}
+ getMetStepGoals(user, todaysDate){
+  let targetDate = this.records.find((record) => {
+    return record.date === todaysDate 
+});
+  let goalReached = targetDate.numSteps >= user.dailyStepGoal
+  return goalReached;
+ }
+  // records.forEach(record => {
+  //   if (record.date === todaysDate && record.minutesActive >= this.activityInfo.record.dailyStepGoal){
+  //     return true
+  //   }
+  //   return targetDate;
+  // });
+
 
 allTimeStairs() {
   let newArr = []

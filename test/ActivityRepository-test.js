@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import ActivityRepository from '../src/ActivityRepository';
 import User from '../src/User';
-describe('ActivityRepository', function() {
+describe.only('ActivityRepository', function() {
   let activity1;
   let activity2;
   let activity3;
@@ -145,16 +145,33 @@ describe('ActivityRepository', function() {
   it('should be a function', function() {
     expect(ActivityRepository).to.be.a('function');
   });
+
   it('should be an instance of activity', function() {
     expect(mockActivityRepo).to.be.an.instanceof(ActivityRepository);
   });
+
   it('should have a record', function() {
-    expect(mockActivityRepo.record).to.be.an.instanceof(Array);
+    expect(mockActivityRepo.records).to.be.an.instanceof(Array);
   })
-    //total steps * user stride length / 5280
+  
   it('should calculate miles walked per day', function () {
-    mockActivityRepo.record.push(...mockRawData.activityData)
-    ActivityRepository.userMilesWalked(mockActivityRepo.record.push)
-    expect(milesWalked).to.equal()
+    mockActivityRepo.records.push(...mockRawData.activityData)
+    let milesWalked = mockActivityRepo.userMilesWalked(user, activity4.date)
+    expect(milesWalked).to.equal(3.2325)
  })
+
+  it('should calculate minutes active for a week', function() {
+    mockActivityRepo.records.push(...mockRawData.activityData)
+    //let result = mockActivityRepo.minutesActivePerWeek(todaysDate)
+    expect(mockActivityRepo.minutesActivePerWeek(todaysDate)).to.equal()
+  })
+
+  it('should return whether step goal was met for specific date', function() {
+    mockActivityRepo.records.push(...mockRawData.activityData)
+
+    expect(mockActivityRepo.getMetStepGoals(user, todaysDate)).to.equal(false)
+  })
+
+
+
 });
