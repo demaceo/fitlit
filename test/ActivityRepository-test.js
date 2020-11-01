@@ -183,10 +183,4 @@ describe.only('ActivityRepository', function() {
 
     expect(mockActivityRepo.allTimeStairs()).to.equal(41)
   })
-
-  it('should', function(){
-    
-  })
-
-
 });
