@@ -1,24 +1,24 @@
 
-import User from './User'
+import User from './User';
 
 class UserRepository {
   constructor(rawData, todaysDate) {
     this.users = this.linkData(rawData, todaysDate);
   }
 
-  linkdata(rawData, todaysDate){
-    let instantiatedUsers = rawData.userData.map((rawUser) => {
-      new User(rawUser, todaysDate);
-      this.linkHydration(instantiatedUsers, rawData.hydrationData);
-      this.linkSleep(instantiatedUsers, rawData.sleepData)
-      this.linkActivity(instantiatedUsers, rawData.activityData);
-    })
-  return instantiatedUsers;
-}
+  linkData(rawData, todaysDate) {
+    let instantiatedUsers = rawData.userData.map(
+      (rawUser) => new User(rawUser, todaysDate)
+    );
+    this.linkHydration(instantiatedUsers, rawData.hydrationData);
+    this.linkSleep(instantiatedUsers, rawData.sleepData);
+    this.linkActivity(instantiatedUsers, rawData.activityData);
+    return instantiatedUsers;
+  }
 
   linkHydration(users, rawHydrationData) {
     users.forEach(user => {
-      user.hydrationInfo.record = rawHydrationData.filter(data => {
+      user.hydrationInfo.records = rawHydrationData.filter(data => {
         return data.userID === user.id
       })
     })
@@ -26,7 +26,7 @@ class UserRepository {
 
   linkSleep(users, rawSleepData) {
     users.forEach(user => {
-      user.sleepInfo.record = rawSleepData.filter(data => {
+      user.sleepInfo.records = rawSleepData.filter(data => {
         return data.userID === user.id
       })
     })
@@ -34,15 +34,20 @@ class UserRepository {
 
   linkActivity(users, rawActivityData) {
     users.forEach(user => {
-      user.activityInfo.record = rawActivityData.filter(data => {
+      user.activityInfo.records = rawActivityData.filter(data => {
         return data.userID === user.id
       })
     })
   }
-  getUser(id) {
-    return this.users.find(user => {
-      return user.id === id;
-    })
+  getAvgStepGoal() {
+    let result = this.users.map((user) => user.dailyStepGoal)
+    let total = result.reduce((sum, goal) => {
+      if (typeof goal === 'number') {
+        sum += goal;
+      }
+      return sum
+    }, 0);
+    return result / this.users.length
   }
   calculateAverageStepGoal() {
     let goals = this.users.map(user => {

@@ -3,14 +3,14 @@ import ActivityRepository from "./ActivityRepository";
 import SleepRepository from "./SleepRepository";
 
  class User {
-   constructor(userData, date) {
-     this.id = userData.id;
-     this.name = userData.name;
-     this.address = userData.address;
-     this.email = userData.email;
-     this.strideLength = userData.strideLength;
-     this.dailyStepGoal = userData.dailyStepGoal;
-     this.friends = userData.friends;
+   constructor(userDetails, date) {
+     this.id = userDetails.id;
+     this.name = userDetails.name;
+     this.address = userDetails.address;
+     this.email = userDetails.email;
+     this.strideLength = userDetails.strideLength;
+     this.dailyStepGoal = userDetails.dailyStepGoal;
+     this.friends = userDetails.friends;
      this.hydrationInfo = new HydrationRepository(date);
      this.activityInfo = new ActivityRepository(date);
      this.sleepInfo = new SleepRepository(date);
