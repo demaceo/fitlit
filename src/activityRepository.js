@@ -10,6 +10,7 @@ newArr = user.activityInfo.records.sort((a,b) => {
 })
 return newArr[0];
 }
+
 latestSteps(){
   let latestRecord = user.activityInfo.records.slice(-1)
   return latestRecord.numSteps
@@ -46,7 +47,6 @@ return ` you have recently ${2000 / latestRecord.steps} miles`
   }, 0)
 };
 
-
  minActive(todaysDate){
   let result = user.activityInfo.records.find(record => {
     if (record.date === todaysDate){
@@ -72,7 +72,7 @@ getMetStepGoals(user, todaysDate){
 });
   let goalReached = targetDate.numSteps >= user.dailyStepGoal
   return goalReached;
- 
+
  }
 
 allTimeStairs() {

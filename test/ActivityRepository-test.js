@@ -103,7 +103,6 @@ describe.only('ActivityRepository', function() {
           "numOunces": 73
         }
       ],
-      //averageOuncesAllTime: NaN;
     },
     sleepInfo: {
       records: [
