@@ -98,4 +98,5 @@ let latestRecord = user.activityInfo.records.slice(-1)
 return ` you have recently ${2000 / latestRecord.steps} miles`
   }
 }
+
 export default ActivityRepository;
