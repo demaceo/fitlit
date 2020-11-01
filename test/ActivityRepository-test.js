@@ -162,8 +162,14 @@ describe.only('ActivityRepository', function() {
 
   it('should calculate minutes active for a week', function() {
     mockActivityRepo.records.push(...mockRawData.activityData)
-    //let result = mockActivityRepo.minutesActivePerWeek(todaysDate)
+    
     expect(mockActivityRepo.minutesActivePerWeek(todaysDate)).to.equal()
+  })
+
+  it('should find all days they exceeded their step goal for a user', function() {
+    mockActivityRepo.records.push(...mockRawData.activityData)
+
+    expect(mockActivityRepo.checkAllGoals(user)).to.deep.equal([])
   })
 
   it('should return whether step goal was met for specific date', function() {

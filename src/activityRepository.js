@@ -56,29 +56,24 @@ return ` you have recently ${2000 / latestRecord.steps} miles`
   return result
 }
 
- checkGoal(todaysDate) {
-  let result = user.activityInfo.records.find(record => {
-    if (record.date === todaysDate && record.minutesActive >= user.dailyStepGoal){
-      return true
+ checkAllGoals(user) {
+  let allGoals = []
+  let result = user.activityInfo.records.filter(record => {
+    if ( record.minutesActive >= user.dailyStepGoal){
+        allGoals.push(record.date)
     }
   });
   return result;
 }
 
- getMetStepGoals(user, todaysDate){
+getMetStepGoals(user, todaysDate){
   let targetDate = this.records.find((record) => {
     return record.date === todaysDate 
 });
   let goalReached = targetDate.numSteps >= user.dailyStepGoal
   return goalReached;
+ 
  }
-  // records.forEach(record => {
-  //   if (record.date === todaysDate && record.minutesActive >= this.activityInfo.record.dailyStepGoal){
-  //     return true
-  //   }
-  //   return targetDate;
-  // });
-
 
 allTimeStairs() {
   let newArr = []
