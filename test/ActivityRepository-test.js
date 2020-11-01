@@ -178,6 +178,15 @@ describe.only('ActivityRepository', function() {
     expect(mockActivityRepo.getMetStepGoals(user, todaysDate)).to.equal(false)
   })
 
+  it('should return all-time stair climbing record', function(){
+    mockActivityRepo.records.push(...mockRawData.activityData)
+
+    expect(mockActivityRepo.allTimeStairs()).to.equal(41)
+  })
+
+  it('should', function(){
+    
+  })
 
 
 });

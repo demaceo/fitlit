@@ -77,10 +77,10 @@ getMetStepGoals(user, todaysDate){
 
 allTimeStairs() {
   let newArr = []
-newArr = user.activityInfo.records.sort((a,b) => {
+  newArr = this.records.sort((a,b) => {
   b.flightsOfStairs - a.flightsOfStairs
 })
-return newArr[0];
+return newArr[0].flightsOfStairs;
 }
 
 latestSteps() {
