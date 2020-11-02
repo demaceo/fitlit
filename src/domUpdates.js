@@ -46,19 +46,19 @@ const domUpdates = {
   },
   displayStepsInfo() {
     document.getElementById('input-steps-minutes').value = '';
-    document.getElementById('#input-steps').value = '';
+    document.getElementById('input-steps').value = '';
     document.qetElementById('steps-info-miles-walked-today').innerText =
     `${this.currentUser.activityInfo.userMilesWalked(this.currentUser, this.todaysDate)}`
     document.getElementById('steps-info-active-minutes-today').innerText = `${this.currentUser.activityInfo.latestSteps()}`
   },
 
   displayStepCalendarCard() {
-    document.getElementById('#steps-calendar-total-active-minutes-weekly').innerText = this.currentUser.activityInfo.minutesActivePerWeek(this.todaysDate)
+    document.getElementById('steps-calendar-total-active-minutes-weekly').innerText = this.currentUser.activityInfo.minutesActivePerWeek(this.todaysDate)
 },
 
   displayStepFriendCard() {
-    document.getElementById('#steps-friends-steps-average-today').innerText = this.userRepository.getCommunityAverageSteps(this.todaysDate)
-    document.getElementById('#steps-friend-active-minutes-average-today').innerText = this.userRepository.getCommunityAvgMinActive(this.todaysDate)
+    document.getElementById('steps-friends-steps-average-today').innerText = this.userRepository.getCommunityAverageSteps(this.todaysDate)
+    document.getElementById('steps-friend-active-minutes-average-today').innerText = this.userRepository.getCommunityAvgMinActive(this.todaysDate)
     document.getElementById('steps-friend-average-step-goal').innerText = this.userRepository.getCommunityAvgStepGoal();
   },
 //***Stairs* */
