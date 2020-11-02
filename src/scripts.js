@@ -20,7 +20,6 @@ function getData() {
     let userRepository = new UserRepository(data, todaysDate);
     currentUser = userRepository.users[Math.floor(Math.random() * 50)]
     domUpdates.defineData(currentUser, todaysDate, userRepository);
-    console.log("This is currentUser", currentUser)
   })
   .catch((err) => console.log(err.message))
 }
@@ -28,7 +27,7 @@ function getData() {
 //****************SECTIONS******************/
 const hydrationSection = document.querySelector('#hydration-card-container')
 const sleepSection = document.querySelector('#sleep-card-container')
-const stepSection = document.querySelector('#steps-card-container'); 
+const stepSection = document.querySelector('#steps-card-container');
 const stairSection = document.querySelector('#stairs-card-container')
 
 //****************STEP SECTION**************** */
@@ -44,7 +43,7 @@ const stepCardHandler = () => {
   if (event.target.classList.contains('step-friends-button')){
     domUpdates.changeCard(stepsMainCard, stepsFriendsCard)
   }
-  if (event.target.classLIst.contains('steps-calendar-button')){
+  if (event.target.classList.contains('steps-calendar-button')){
     domUpdates.changeCard(stepsMainCard, stepsCalendarCard)
   }
   if (event.target.classList.contains('steps-go-back-button')){
@@ -60,17 +59,16 @@ const stepCardHandler = () => {
     if (event.target.classList.contains('hydration-info-button')){
       domUpdates.changeCard(hydrationMainCard, hydrationInfoCard)
     }
-    if(event.target.classLIst.contains('hydration-friends-button')){
+    if(event.target.classList.contains('hydration-friends-button')){
       domUpdates.changeCard(hydrationMainCard, hydrationFriendsCard)
     }
     if (event.target.classList.contains('hydration-calendar-button')){
       domUpdates.changeCard(hydrationMainCard, hydrationCalendarCard)
-    } 
+    }
      if (event.target.classList.contains('steps-go-back-button')){
       domUpdates.changeCard(event.target.parentNode, hydrationMainCard)
       }
     }
-    
   //******************SLEEP SECTION******************************** */
   const sleepCardHandler = () => {
     let sleepMainCard = document.querySelector('#sleep-main-card')
@@ -105,12 +103,10 @@ const stepCardHandler = () => {
     if (event.target.classList.contains('stairs-calendar-card')){
       domUpdates.changeCard(stairsMainCard, stairsCalendarCard)
     }
-    if (event.target.classList.contains('stair-go-back-button')){
+    if (event.target.classList.contains('stairs-go-back-button')){
       domUpdates.changeCard(event.target.parentNode, stairsMainCard)
     }
   }
-
-//
 // //***********************QUERY SELECTORS*************************//
 //
 // let dailyOz = document.querySelectorAll('.daily-oz');
@@ -130,34 +126,7 @@ const stepCardHandler = () => {
 // let profileButton = document.querySelector('#profile-button');
 
 
-// //*****************SLEEP FUNCTIONALITY*****************************
-//
-// sleepCalendarHoursAverageWeekly.innerText = user.calculateAverageHoursThisWeek(todayDate);
-// sleepCalendarQualityAverageWeekly.innerText = user.calculateAverageQualityThisWeek(todayDate);
-// sleepFriendLongestSleeper.innerText = userRepository.users.find(user => {
-//   return user.id === userRepository.getLongestSleepers(todayDate)
-// }).getFirstName();
-// sleepFriendWorstSleeper.innerText = userRepository.users.find(user => {
-//   return user.id === userRepository.getWorstSleepers(todayDate)
-// }).getFirstName();
-// sleepInfoHoursAverageAlltime.innerText = user.hoursSleptAverage;
-// stepsInfoMilesWalkedToday.innerText = user.activityRecord.find(activity => {
-//   return (activity.date === todayDate && activity.userId === user.id)
-// }).calculateMiles(userRepository);
-//
-// sleepInfoQualityAverageAlltime.innerText = user.sleepQualityAverage;
-//
-// sleepInfoQualityToday.innerText = sleepData.find(sleep => {
-//   return sleep.userID === user.id && sleep.date === todayDate;
-// }).sleepQuality;
-//
-// sleepUserHoursToday.innerText = sleepData.find(sleep => {
-//   return sleep.userID === user.id && sleep.date === todayDate;
-// }).hoursSlept;
-
 //*****************MISC****************************************
-
-
 // user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
 
 // user.friendsActivityRecords.forEach(friend => {
@@ -182,8 +151,7 @@ const stepCardHandler = () => {
 
 //****************EVENT LISTENERS*********** */
 window.addEventListener('load', getData )
-stepSection.addEventListener('click', stepCardHandler); 
+stepSection.addEventListener('click', stepCardHandler);
 stairSection.addEventListener('click', stairsCardHandler)
 hydrationSection.addEventListener('click', hydrationCardHandler)
 sleepSection.addEventListener('click', sleepCardHandler)
-
