@@ -41,6 +41,12 @@ Objectives - Make the Sleep section of the website functional by creating method
 ![]()
 
 
+### Iteration 4 - Activity
+Objectives - Make the Activity section of the website functional by creating methods for any information passed in by the user for this category.
+1. Create a Activity class
+2. Create a Activity repository
+3. Create methods for the Activity class and repository.
+4. Create tests and methods for Activity repository.
 
 
 
