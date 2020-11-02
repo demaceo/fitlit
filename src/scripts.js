@@ -65,7 +65,7 @@ const stepCardHandler = () => {
     if (event.target.classList.contains('hydration-calendar-button')){
       domUpdates.changeCard(hydrationMainCard, hydrationCalendarCard)
     }
-     if (event.target.classList.contains('steps-go-back-button')){
+     if (event.target.classList.contains('hydration-go-back-button')){
       domUpdates.changeCard(event.target.parentNode, hydrationMainCard)
       }
     }
@@ -74,7 +74,7 @@ const stepCardHandler = () => {
     let sleepMainCard = document.querySelector('#sleep-main-card')
     let sleepInfoCard = document.querySelector('#sleep-info-card')
     let sleepFriendsCard = document.querySelector('#sleep-friends-card')
-    let sleepCalendarCard = document.querySelector('#sleep-info-button')
+    let sleepCalendarCard = document.querySelector('#sleep-calendar-card')
     if (event.target.classList.contains('sleep-info-button')){
       domUpdates.changeCard(sleepMainCard, sleepInfoCard)
     }

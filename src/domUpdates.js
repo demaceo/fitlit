@@ -74,7 +74,7 @@ displayStairsCalendarCard(){
 //***Hydration Display Section******************//
 
 
-//***Hydration Display Section******************//
+//***Sleep Display Section******************//
 }
 
 export default domUpdates;
