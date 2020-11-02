@@ -49,6 +49,13 @@ Objectives - Make the Activity section of the website functional by creating met
 4. Create tests and methods for Activity repository.
 
 
+### Iteration 5 - Trends & Challenges
+Objective - Calculate all of the users' average sleep quality that is less than 3.
+1. Create a function that takes in all users' data 
+2. Calculate the each users' average sleep quality for a given week.
+3. Display users' who have an average sleep quality < 3.
+
+
 
 
 
