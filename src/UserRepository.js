@@ -39,16 +39,6 @@ class UserRepository {
       })
     })
   }
-  getAvgStepGoal() {
-    let result = this.users.map((user) => user.dailyStepGoal)
-    let total = result.reduce((sum, goal) => {
-      if (typeof goal === 'number') {
-        sum += goal;
-      }
-      return sum
-    }, 0);
-    return result / this.users.length
-  }
   calculateAverageStepGoal() {
     let goals = this.users.map(user => {
       return user.dailyStepGoal;

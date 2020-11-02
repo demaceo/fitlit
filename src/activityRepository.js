@@ -88,6 +88,11 @@ latestSteps() {
   return latestRecord.numSteps
   }
 
+latestStairs() {
+  let latestRecord = user.activityInfo.records.slice(-1)
+  return latestRecord.flightsOfStairs
+}
+
 latestMinutesActive(){
 let latestRecord = user.activityInfo.records.slice(-1)
   return latestRecord.minutesActive
@@ -98,4 +103,5 @@ let latestRecord = user.activityInfo.records.slice(-1)
 return ` you have recently ${2000 / latestRecord.steps} miles`
   }
 }
+
 export default ActivityRepository;
