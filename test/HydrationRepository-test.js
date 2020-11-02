@@ -64,7 +64,6 @@ describe.only('HydrationRepository', function() {
 
   it('should hold all of a users hydration entries in an array', function() {
     mockHydrationRepo.records.push(...mockRawData);
-    console.log(mockHydrationRepo.records)
     expect(mockHydrationRepo.records.length).to.deep.equal(7);
   });
 

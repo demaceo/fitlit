@@ -1,167 +1,119 @@
-import {expect} from 'chai'
+import {
+  expect
+} from 'chai'
 import SleepRepository from '../src/sleepRepository';
 import User from '../src/User';
 describe.only('SleepRepository', function() {
-  let sleep1;
-  let sleep2;
-  let sleep3;
-  let sleep4;
-  let sleep5;
-  let sleep6;
-  let sleep7;
-  let mockSleepRepo;
-  let mockRawData;
-  let todaysDate;
-  let sleepData;
+  let sleepRepo;
   let user;
+  let sleepData;
   beforeEach(() => {
-    sleep1 = {
+    sleepData = [{
         "userID": 1,
-        "date": "2019/06/15",
+        "date": '2019/06/01',
         "hoursSlept": 6.1,
-        "sleepQuality": 2.2
+        "sleepQuality": 1.2
       },
-      sleep2 = {
-        "userID": 2,
-        "date": "2019/06/15",
+      {
+        "userID": 1,
+        "date": '2019/06/02',
         "hoursSlept": 7,
-        "sleepQuality": 4.7
+        "sleepQuality": 1.7
       },
-      sleep3 = {
-        "userID": 3,
-        "date": "2019/06/15",
-        "hoursSlept": 10.8,
-        "sleepQuality": 4.7
+      {
+        "userID": 1,
+        "date": '2019/06/03',
+        "hoursSlept": 1.8,
+        "sleepQuality": 10.7
       },
-      sleep4 = {
-        "userID": 4,
-        "date": "2019/06/15",
+      {
+        "userID": 1,
+        "date": '2019/06/04',
         "hoursSlept": 5.4,
         "sleepQuality": 3
       },
-      sleep5 = {
-        "userID": 5,
-        "date": "2019/06/15",
+      {
+        "userID": 1,
+        "date": '2019/06/05',
         "hoursSlept": 4.1,
-        "sleepQuality": 3.6
+        "sleepQuality": 10.6
       },
-      sleep6 = {
-        "userID": 6,
-        "date": "2019/06/15",
+      {
+        "userID": 1,
+        "date": '2019/06/06',
         "hoursSlept": 9.6,
         "sleepQuality": 2.9
       },
-      sleep7 = {
+      {
         "userID": 1,
-        "date": "2019/06/16",
+        "date": '2019/06/07',
         "hoursSlept": 5.1,
         "sleepQuality": 2.6
       },
-      mockRawData = {
-        userData: [{
-          id: 19,
-          name: "Wilburn Collins",
-          address: "543 Keeling Road, Schummside ID 47123-6269",
-          email: "Blake27@gmail.com",
-          strideLength: 3.3,
-          dailyStepGoal: 8000,
-          friends: [30, 43, 22, 39]
-        }],
-        sleepData: [sleep1, sleep2, sleep3, sleep4, sleep5, sleep6, sleep7]
-      };
-      todaysDate = '06/15/2019',
-      mockSleepRepo = new SleepRepository(todaysDate);
-    })
-      // user = new User({
-      //
-      //     id: 19,
-      //     name: “Wilburn Collins”,
-      //     address: “543 Keeling Road, Schummside ID 47123-6269",
-      //     email: “Blake27@gmail.com”,
-      //     strideLength: 3.3,
-      //     dailyStepGoal: 8000,
-      //     friends: [30, 43, 22, 39]
-      //   },
-      //   hydrationInfo = {
-      //     record: [{
-      //         “userID”: 19,
-      //         “date”: “2019/06/15",
-      //         “numOunces”: 62
-      //       },
-      //       {
-      //         “userID”: 19,
-      //         “date”: “2019/06/16",
-      //         “numOunces”: 73
-      //       }
-      //     ],
-      //   },
-      //   sleepInfo = {
-      //     record: [{
-      //         “userID”: 19,
-      //         “date”: “2019/06/16",
-      //         “hoursSlept”: 5.5,
-      //         “sleepQuality”: 1.2
-      //       },
-      //       {
-      //         “userID”: 19,
-      //         “date”: “2019/06/17”,
-      //         “hoursSlept”: 9.5,
-      //         “sleepQuality”: 2
-      //       },
-      //     ],
-      //   },
-      //   sleepInfo = {
-      //     record: [{
-      //         “userID”: 19,
-      //         “date”: “2019/06/22",
-      //         “numSteps”: 12577,
-      //         “minutesActive”: 126,
-      //         “flightsOfStairs”: 37
-      //       },
-      //       {
-      //         “userID”: 19,
-      //         “date”: “2019/06/23",
-      //         “numSteps”: 12226,
-      //         “minutesActive”: 247,
-      //         “flightsOfStairs”: 27
-      //       }
-      //     ]
-      //   })
-  //});
+      {
+        "userID": 1,
+        "date": '2019/06/08',
+        "hoursSlept": 5.1,
+        "sleepQuality": 9.6
+      }
+    ];
+    sleepRepo = new SleepRepository();
+    sleepRepo.records.push(...sleepData);
+  });
+
   it('should be a function', function() {
     expect(SleepRepository).to.be.a('function');
   });
+
   it('should be an instance of Sleep', function() {
-    expect(mockSleepRepo).to.be.an.instanceof(SleepRepository);
+    expect(sleepRepo).to.be.an.instanceof(SleepRepository);
   });
+
   it('should have a record', function() {
-    expect(mockSleepRepo.record).to.be.an.instanceof(Array);
-  })
-  //total steps * user stride length / 5280
-  it('should return hours slept for given date', function() {
-    expect(mockSleepRepo.findHoursSleptOnDate('2019/06/19')).to.equal()
+
+    expect(sleepRepo.records).to.be.an.instanceof(Array);
   });
-  it('should return sleep quality for given date', function() {
-    expect(mockSleepRepo.findSleepQualityOnDate('2019/06/19')).to.equal()
+
+  it('should return hours slept for a given date', function() {
+    let hrsSlept = sleepRepo.findHoursSleptOn('2019/06/08');
+    expect(hrsSlept).to.equal(5.1)
   });
+
+  it('should return sleep quality for a given date', function() {
+    let sleepQ = sleepRepo.findSleepQualityOn('2019/06/08')
+    expect(sleepQ).to.equal(9.6)
+  });
+
   it('should return average total hours slept', function() {
-    expect(mockSleepRepo.averageTotalHoursSlept()).to.equal()
+    let avgHoursSlept = sleepRepo.averageHoursSlept()
+    expect(avgHoursSlept).to.equal(6)
   });
   it('should return average total sleep quality', function() {
-    expect(mockSleepRepo.averageTotalSleepQuality()).to.equal()
+    let avgSleepQuality = sleepRepo.averageSleepQuality();
+    expect(avgSleepQuality).to.equal(6)
   });
   it('should be able to return an array of daily hours slept for a given week', function() {
-    expect(mockSleepRepo._________).to.equal()
+    let weeklyHoursSlept = sleepRepo.determineWeeklyHoursSlept()
+    expect(weeklyHoursSlept).to.be.an.instanceof(Array)
   });
-  it('should be able to return an array of daily quality of sleep for a given week', function() {
-    expect(mockSleepRepo._________).to.equal()
+  // it('should be able to return an array of daily quality of sleep for a given week', function() {
+  //  let weeklySleepQuality = sleepRepo.determineWeeklySleepQuality()
+      // expect(weeklySleepQuality).to.be.an.instanceof(Array)
+  // });
+  // it('should be able to return an average of hours slept for a given week', function() {
+  //   //method not written out yet in SleepRepository class
+  //   expect(mockSleepRepo._________).to.equal()
+  // });
+  // it('should be able to return an average of a users quality of sleep for a given week', function() {
+  //   //method not written out yet in SleepRepository class
+  //   expect(mockSleepRepo._________).to.equal()
+  // });
+  it('should be able to return a user/s worst quality night of sleep', function() {
+  let worstSleep = sleepRepo.findWorstNightsSleep();
+    expect(worstSleep).to.equal('On 2019/06/01, your sleep quality of 1.2 was godawful.')
   });
-  it('should be able to return an average of hours slept for a given week', function() {
-//method not written out yet in SleepRepository class
-    expect(mockSleepRepo._________).to.equal()
-  });
-  it('should be able to return an average of a users quality of sleep for a given week', function() {
-//method not written out yet in SleepRepository class
-    expect(mockSleepRepo._________).to.equal()
+  it('should be able to return whether or not a users sleep quality for a given week is greater than 3', function() {
+  let bleh = sleepRepo.determineSleepQualityGreaterThanThree("2019/06/01")
+    expect(bleh).to.equal(true)
   });
 });
