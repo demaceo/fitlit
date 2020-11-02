@@ -89,7 +89,7 @@ const stepCardHandler = () => {
       domUpdates.changeCard(sleepMainCard, sleepCalendarCard)
     }
     if (event.target.classList.contains('sleep-go-back-button')){
-      domUpdates.changeCard(event.targetrs.parentNode, sleepMainCard)
+      domUpdates.changeCard(event.target.parentNode, sleepMainCard)
     }
   }
 //********************STAIR SECTION******************************* */
@@ -104,11 +104,14 @@ const stepCardHandler = () => {
     if (event.target.classList.contains('stairs-friends-button')){
       domUpdates.changeCard(stairsMainCard, stairsFriendsCard)
     }
-    if (event.target.classList.contains('stairs-calendar-card'){
+    if (event.target.classList.contains('stairs-calendar-card')){
       domUpdates.changeCard(stairsMainCard, stairsCalendarCard)
     }
-    if (event.target.classList.contains('stair-go-back-button'))
+    if (event.target.classList.contains('stair-go-back-button')){
+      domUpdates.changeCard(event.target.parentNode, stairsMainCard)
+    }
   }
+
 //
 // //***********************QUERY SELECTORS*************************//
 //
@@ -240,92 +243,94 @@ const stepCardHandler = () => {
 //*****************ACTIVITY FUNCTIONALITY*************************
 
 
-function updateTrendingStairsDays() {
-  user.findTrendingStairsDays();
-  trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
-}
+// function updateTrendingStairsDays() {
+//   user.findTrendingStairsDays();
+//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
+// }
 
-function updateTrendingStepDays() {
-  user.findTrendingStepDays();
-  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
-}
+// function updateTrendingStepDays() {
+//   user.findTrendingStepDays();
+//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+// }
 
-stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
+// stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
 
-stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+// stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
 
-stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1);
+// stairsFriendFlightsAverageToday.innerText = (userRepository.calculateAverageStairs(todayDate) / 12).toFixed(1);
 
-stairsInfoFlightsToday.innerText = activityData.find(activity => {
-  return activity.userID === user.id && activity.date === todayDate;
-}).flightsOfStairs;
+// stairsInfoFlightsToday.innerText = activityData.find(activity => {
+//   return activity.userID === user.id && activity.date === todayDate;
+// }).flightsOfStairs;
 
-stairsUserStairsToday.innerText = activityData.find(activity => {
-  return activity.userID === user.id && activity.date === todayDate;
-}).flightsOfStairs * 12;
+// stairsUserStairsToday.innerText = activityData.find(activity => {
+//   return activity.userID === user.id && activity.date === todayDate;
+// }).flightsOfStairs * 12;
 
-stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
+// stairsCalendarFlightsAverageWeekly.innerText = user.calculateAverageFlightsThisWeek(todayDate);
 
-stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
+// stairsCalendarStairsAverageWeekly.innerText = (user.calculateAverageFlightsThisWeek(todayDate) * 12).toFixed(0);
 
-stairsTrendingButton.addEventListener('click', function() {
-  user.findTrendingStairsDays();
-  trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
-});
+// stairsTrendingButton.addEventListener('click', function() {
+//   user.findTrendingStairsDays();
+//   trendingStairsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStairsDays[0]}</p>`;
+// });
 
-stepsCalendarTotalActiveMinutesWeekly.innerText = user.calculateAverageMinutesActiveThisWeek(todayDate);
+// stepsCalendarTotalActiveMinutesWeekly.innerText = user.calculateAverageMinutesActiveThisWeek(todayDate);
 
-stepsCalendarTotalStepsWeekly.innerText = user.calculateAverageStepsThisWeek(todayDate);
+// stepsCalendarTotalStepsWeekly.innerText = user.calculateAverageStepsThisWeek(todayDate);
 
-stepsTrendingButton.addEventListener('click', function() {
-  user.findTrendingStepDays();
-  trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
-});
+// stepsTrendingButton.addEventListener('click', function() {
+//   user.findTrendingStepDays();
+//   trendingStepsPhraseContainer.innerHTML = `<p class='trend-line'>${user.trendingStepDays[0]}</p>`;
+// });
 
-stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate);
+// stepsFriendActiveMinutesAverageToday.innerText = userRepository.calculateAverageMinutesActive(todayDate);
 
-stepsFriendAverageStepGoal.innerText = `${userRepository.calculateAverageStepGoal()}`;
+// stepsFriendAverageStepGoal.innerText = `${userRepository.calculateAverageStepGoal()}`;
 
-stepsFriendStepsAverageToday.innerText = userRepository.calculateAverageSteps(todayDate);
+// stepsFriendStepsAverageToday.innerText = userRepository.calculateAverageSteps(todayDate);
 
-stepsInfoActiveMinutesToday.innerText = activityData.find(activity => {
-  return activity.userID === user.id && activity.date === todayDate;
-}).minutesActive;
+// stepsInfoActiveMinutesToday.innerText = activityData.find(activity => {
+//   return activity.userID === user.id && activity.date === todayDate;
+// }).minutesActive;
 
-stepsUserStepsToday.innerText = activityData.find(activity => {
-  return activity.userID === user.id && activity.date === todayDate;
-}).numSteps;
+// stepsUserStepsToday.innerText = activityData.find(activity => {
+//   return activity.userID === user.id && activity.date === todayDate;
+// }).numSteps;
 
 //*****************FETCH FUNCTIONALITY**************************
 
 //*****************MISC****************************************
 
 
-user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
+// user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
 
-user.friendsActivityRecords.forEach(friend => {
-  dropdownFriendsStepsContainer.innerHTML += `
-  <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
-  `;
-});
+// user.friendsActivityRecords.forEach(friend => {
+//   dropdownFriendsStepsContainer.innerHTML += `
+//   <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
+//   `;
+// });
 
-let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
+// let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
 
-friendsStepsParagraphs.forEach(paragraph => {
-  if (friendsStepsParagraphs[0] === paragraph) {
-    paragraph.classList.add('green-text');
-  }
-  if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-    paragraph.classList.add('red-text');
-  }
-  if (paragraph.innerText.includes('YOU')) {
-    paragraph.classList.add('yellow-text');
-  }
-});
+// friendsStepsParagraphs.forEach(paragraph => {
+//   if (friendsStepsParagraphs[0] === paragraph) {
+//     paragraph.classList.add('green-text');
+//   }
+//   if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
+//     paragraph.classList.add('red-text');
+//   }
+//   if (paragraph.innerText.includes('YOU')) {
+//     paragraph.classList.add('yellow-text');
+//   }
+// });
 
 //****************EVENT LISTENERS*********** */
 window.addEventListener('load', getData )
 stepSection.addEventListener('click', stepCardHandler); 
+stairSection.addEventListener('click', stairsCardHandler)
+hydrationSection.addEventListener('click', hydrationCardHandler)
 //********************ORIGINAL NAVIGATION FUNCTION******************
 
 // function showInfo() {
