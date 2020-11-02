@@ -38,9 +38,6 @@ Objectives - Make the Sleep section of the website functional by creating method
 3. Create methods for the Sleep class and repository.
 4. Create tests and methods for Sleep repository.
 
-![]()
-
-
 ### Iteration 4 - Activity
 Objectives - Make the Activity section of the website functional by creating methods for any information passed in by the user for this category.
 1. Create a Activity class
@@ -55,6 +52,7 @@ Objective - Calculate all of the users' average sleep quality that is less than 
 2. Calculate the each users' average sleep quality for a given week.
 3. Display users' who have an average sleep quality < 3.
 
+![]()
 
 
 
