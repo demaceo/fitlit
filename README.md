@@ -24,7 +24,12 @@ Objectives - Create a `User` repository and complete TDD by adding functionality
 2. Created TDD and methods for the `User` class.
 3. Added information to the DOM using scripts.js.
 
-
+### Iteration 2 - Hydration
+Objectives - Make the Hydration section of the website functional by creating methods for any information passed in by the user for this category.
+1. Create a Hydration class
+2. Create a Hydration repository
+3. Create methods for the Hydration class and repository.
+4. Create tests and methods for Hydration repository.
 
 
 
