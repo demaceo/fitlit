@@ -31,6 +31,15 @@ Objectives - Make the Hydration section of the website functional by creating me
 3. Create methods for the Hydration class and repository.
 4. Create tests and methods for Hydration repository.
 
+### Iteration 3 - Sleep
+Objectives - Make the Sleep section of the website functional by creating methods for any information passed in by the user for this category.
+1. Create a Sleep class
+2. Create a Sleep repository
+3. Create methods for the Sleep class and repository.
+4. Create tests and methods for Sleep repository.
+
+![]()
+
 
 
 
