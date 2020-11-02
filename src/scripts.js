@@ -1,4 +1,4 @@
-import './css/base.scss';
+
 import './css/styles.scss';
 
 
@@ -19,40 +19,96 @@ function getData() {
     let todaysDate = moment().format('YYYY/MM/DD');
     let userRepository = new UserRepository(data, todaysDate);
     currentUser = userRepository.users[Math.floor(Math.random() * 50)]
-    domeUpdates.defineData(currentUser, todaysDate, userRepository);
+    domUpdates.defineData(currentUser, todaysDate, userRepository);
     console.log("This is currentUser", currentUser)
   })
   .catch((err) => console.log(err.message))
 }
 
+//****************SECTIONS******************/
+const hydrationSection = document.querySelector('#hydration-card-container')
+const sleepSection = document.querySelector('#sleep-card-container')
+const stepSection = document.querySelector('#steps-card-container'); 
+const starSection = document.querySelector('#stairs-card-container')
 
 
 
-//**********OLD INSTANTIATION CODE*************
-  // let user = userRepository.users[0];
+//****************STEP SECTION**************** */
 
-//
-// let userRepository = new UserRepository();
-//
-// userData.forEach(user => {
-//   userRepository.users.push(user)
-// });
-//
-// activityData.forEach(activity => {
-//   activity = new Activity(activity, userRepository);
-// });
-//
-// hydrationData.forEach(hydration => {
-//   hydration = new Hydration(hydration, userRepository);
-// });
-//
-// sleepData.forEach(sleep => {
-//   sleep = new Sleep(sleep, userRepository);
-// });
-//
-// let todayDate = "2019/09/22"; //this needs to be dynamically updated
-//
-// user.findFriendsNames(userRepository.users);
+const stepCardHandler = () => {
+  let stepsMainCard = document.querySelector('#steps-main-card')
+  let stepsInfoCard = document.querySelector('#steps-info-card')
+  let stepsFriendsCard = document.querySelector('#steps-friends-card')
+  let stepsCalendarCard = document.querySelector('#steps-calendar-card')
+  if (event.target.classList.contains('steps-info-button')){
+    domUpdates.changeCard(stepsMainCard, stepsInfoCard)
+  }
+  if (event.target.classList.contains('step-friends-button')){
+    domUpdates.changeCard(stepsMainCard, stepsFriendsCard)
+  }
+  if (event.target.classLIst.contains('steps-calendar-button')){
+    domUpdates.changeCard(stepsMainCard, stepsCalendarCard)
+  }
+  if (event.target.classList.contains('steps-go-back-button')){
+    domUpdates.changeCard(event.target.parentNode, stepsMainCard)
+  }
+}
+//*********************HYDRATION SECTION************************** */
+  const hydrationCardHandler = () => {
+    let hydrationMainCard = document.querySelector('#hydration-main-card')
+    let hydrationInfoCard = document.querySelector('#hydration-info-card')
+    let hydrationFriendsCard = document.querySelector('#hydration-friends-card')
+    let hydrationCalendarCard = document.querySelector('hydration-calendar-card')
+    if (event.target.classList.contains('hydration-info-button')){
+      domUpdates.changeCard(hydrationMainCard, hydrationInfoCard)
+    }
+    if(event.target.classLIst.contains('hydration-friends-button')){
+      domUpdates.changeCard(hydrationMainCard, hydrationFriendsCard)
+    }
+    if (event.target.classList.contains('hydration-calendar-button')){
+      domUpdates.changeCard(hydrationMainCard, hydrationCalendarCard)
+    } 
+     if (event.target.classList.contains('steps-go-back-button')){
+      domUpdates.changeCard(event.target.parentNode, hydrationMainCard)
+      }
+    }
+
+  //******************SLEEP SECTION******************************** */
+  const sleepCardHandler = () => {
+    let sleepMainCard = document.querySelector('#sleep-main-card')
+    let sleepInfoCard = document.querySelector('#sleep-info-card')
+    let sleepFriendsCard = document.querySelector('#sleep-friends-card')
+    let sleepCalendarCard = document.querySelector('#sleep-info-button')
+    if (event.target.classList.contains('sleep-info-button')){
+      domUpdates.changeCard(sleepMainCard, sleepInfoCard)
+    }
+    if (event.target.classList.contains('sleep-friends-button')){
+      domUpdates.changeCard(sleepMainCard, sleepFriendsCard)
+    }
+    if (event.target.classList.contains('sleep-calendar-button')){
+      domUpdates.changeCard(sleepMainCard, sleepCalendarCard)
+    }
+    if (event.target.classList.contains('sleep-go-back-button')){
+      domUpdates.changeCard(event.targetrs.parentNode, sleepMainCard)
+    }
+  }
+//********************STAIR SECTION******************************* */
+  const stairsCardHandler = () => {
+    let stairsMainCard = document.querySelector('#stairs-main-card')
+    let stairsInfoCard = document.querySelector('#stairs-info-card')
+    let stairsFriendsCard = document.querySelector('#sairs-friends-card')
+    let stairsCalendarCard = document.querySelector('#stairs-calendar-card')
+    if (event.target.classList.contains('stairs-info-button')){
+      domUpdates.changeCard(stairsMainCard, stairsInfoCard)
+    }
+    if (event.target.classList.contains('stairs-friends-button')){
+      domUpdates.changeCard(stairsMainCard, stairsFriendsCard)
+    }
+    if (event.target.classList.contains('stairs-calendar-card'){
+      domUpdates.changeCard(stairsMainCard, stairsCalendarCard)
+    }
+    if (event.target.classList.contains('stair-go-back-button'))
+  }
 //
 // //***********************QUERY SELECTORS*************************//
 //
@@ -137,7 +193,7 @@ function getData() {
 
 //*****************EVENT LISTENERS*****************************
 
-window.addEventListener('load', getData )
+
 
 //*****************USER FUNCTIONALITY***************************
 // dropdownGoal.innerText = `DAILY STEP GOAL | ${user.dailyStepGoal}`;
@@ -267,61 +323,64 @@ friendsStepsParagraphs.forEach(paragraph => {
   }
 });
 
+//****************EVENT LISTENERS*********** */
+window.addEventListener('load', getData )
+stepSection.addEventListener('click', stepCardHandler); 
 //********************ORIGINAL NAVIGATION FUNCTION******************
 
-function showInfo() {
-  if (event.target.classList.contains('steps-info-button')) {
-    flipCard(stepsMainCard, stepsInfoCard);
-  }
-  if (event.target.classList.contains('steps-friends-button')) {
-    flipCard(stepsMainCard, stepsFriendsCard);
-  }
-  if (event.target.classList.contains('steps-trending-button')) {
-    flipCard(stepsMainCard, stepsTrendingCard);
-  }
-  if (event.target.classList.contains('steps-calendar-button')) {
-    flipCard(stepsMainCard, stepsCalendarCard);
-  }
-  if (event.target.classList.contains('hydration-info-button')) {
-    flipCard(hydrationMainCard, hydrationInfoCard);
-  }
-  if (event.target.classList.contains('hydration-friends-button')) {
-    flipCard(hydrationMainCard, hydrationFriendsCard);
-  }
-  if (event.target.classList.contains('hydration-calendar-button')) {
-    flipCard(hydrationMainCard, hydrationCalendarCard);
-  }
-  if (event.target.classList.contains('stairs-info-button')) {
-    flipCard(stairsMainCard, stairsInfoCard);
-  }
-  if (event.target.classList.contains('stairs-friends-button')) {
-    flipCard(stairsMainCard, stairsFriendsCard);
-  }
-  if (event.target.classList.contains('stairs-trending-button')) {
-    flipCard(stairsMainCard, stairsTrendingCard);
-  }
-  if (event.target.classList.contains('stairs-calendar-button')) {
-    flipCard(stairsMainCard, stairsCalendarCard);
-  }
-  if (event.target.classList.contains('sleep-info-button')) {
-    flipCard(sleepMainCard, sleepInfoCard);
-  }
-  if (event.target.classList.contains('sleep-friends-button')) {
-    flipCard(sleepMainCard, sleepFriendsCard);
-  }
-  if (event.target.classList.contains('sleep-calendar-button')) {
-    flipCard(sleepMainCard, sleepCalendarCard);
-  }
-  if (event.target.classList.contains('steps-go-back-button')) {
-    flipCard(event.target.parentNode, stepsMainCard);
-  }
-  if (event.target.classList.contains('hydration-go-back-button')) {
-    flipCard(event.target.parentNode, hydrationMainCard);
-  }
-  if (event.target.classList.contains('stairs-go-back-button')) {
-    flipCard(event.target.parentNode, stairsMainCard);
-  }
-  if (event.target.classList.contains('sleep-go-back-button')) {
-    flipCard(event.target.parentNode, sleepMainCard);
-  }
-}
+// function showInfo() {
+//   if (event.target.classList.contains('steps-info-button')) {
+//     flipCard(stepsMainCard, stepsInfoCard);
+//   }
+//   if (event.target.classList.contains('steps-friends-button')) {
+//     flipCard(stepsMainCard, stepsFriendsCard);
+//   }
+//   if (event.target.classList.contains('steps-trending-button')) {
+//     flipCard(stepsMainCard, stepsTrendingCard);
+//   }
+//   if (event.target.classList.contains('steps-calendar-button')) {
+//     flipCard(stepsMainCard, stepsCalendarCard);
+//   }
+//   if (event.target.classList.contains('hydration-info-button')) {
+//     flipCard(hydrationMainCard, hydrationInfoCard);
+//   }
+//   if (event.target.classList.contains('hydration-friends-button')) {
+//     flipCard(hydrationMainCard, hydrationFriendsCard);
+//   }
+//   if (event.target.classList.contains('hydration-calendar-button')) {
+//     flipCard(hydrationMainCard, hydrationCalendarCard);
+//   }
+//   if (event.target.classList.contains('stairs-info-button')) {
+//     flipCard(stairsMainCard, stairsInfoCard);
+//   }
+//   if (event.target.classList.contains('stairs-friends-button')) {
+//     flipCard(stairsMainCard, stairsFriendsCard);
+//   }
+//   if (event.target.classList.contains('stairs-trending-button')) {
+//     flipCard(stairsMainCard, stairsTrendingCard);
+//   }
+//   if (event.target.classList.contains('stairs-calendar-button')) {
+//     flipCard(stairsMainCard, stairsCalendarCard);
+//   }
+//   if (event.target.classList.contains('sleep-info-button')) {
+//     flipCard(sleepMainCard, sleepInfoCard);
+//   }
+//   if (event.target.classList.contains('sleep-friends-button')) {
+//     flipCard(sleepMainCard, sleepFriendsCard);
+//   }
+//   if (event.target.classList.contains('sleep-calendar-button')) {
+//     flipCard(sleepMainCard, sleepCalendarCard);
+//   }
+//   if (event.target.classList.contains('steps-go-back-button')) {
+//     flipCard(event.target.parentNode, stepsMainCard);
+//   }
+//   if (event.target.classList.contains('hydration-go-back-button')) {
+//     flipCard(event.target.parentNode, hydrationMainCard);
+//   }
+//   if (event.target.classList.contains('stairs-go-back-button')) {
+//     flipCard(event.target.parentNode, stairsMainCard);
+//   }
+//   if (event.target.classList.contains('sleep-go-back-button')) {
+//     flipCard(event.target.parentNode, sleepMainCard);
+//   }
+// }
