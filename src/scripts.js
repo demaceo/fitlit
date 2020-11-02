@@ -1,4 +1,4 @@
-
+import './css/base.scss'
 import './css/styles.scss';
 
 
@@ -15,13 +15,19 @@ let todaysDate
 //*****************CLASS INSTANTIATIONS*****************
 function getData() {
   return fetchData()
-  .then(data => {
+  .then((data) => {
     let todaysDate = moment().format('YYYY/MM/DD');
     let userRepository = new UserRepository(data, todaysDate);
     currentUser = userRepository.users[Math.floor(Math.random() * 50)]
     domUpdates.defineData(currentUser, todaysDate, userRepository);
-  })
-  .catch((err) => console.log(err.message))
+    }).then(() => {
+      domUpdates.displayPage();
+    })
+    .catch((err) => console.log(err.message));
+  }
+
+function populateUserProfile() {
+  domUpdates.displayDropDown(currentUser);
 }
 
 //****************SECTIONS******************/
@@ -155,3 +161,4 @@ stepSection.addEventListener('click', stepCardHandler);
 stairSection.addEventListener('click', stairsCardHandler)
 hydrationSection.addEventListener('click', hydrationCardHandler)
 sleepSection.addEventListener('click', sleepCardHandler)
+document.querySelector('#profile-button').addEventListener('click', populateUserProfile);

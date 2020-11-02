@@ -13,6 +13,8 @@ const domUpdates = {
     this.displayName();
     this.displayStepCard();
     this.displayStairCard();
+    // this.displaySleepCard();
+    // this.displayHydrationCard();
   },
 
   displayName() {
@@ -69,10 +71,22 @@ displayStairsCard() {
 
 displayStairsCalendarCard(){
   // document.getElementById('#steps-calendar-flights-average-weekly').innerText = this.activityInfo.records.getWeekly
-}
+},
 
 //***Hydration Display Section******************//
 
+displayHydrationCard(){
+  document.getElementById('hydration-user-ounces-today').innerText = `${this.currentUser.hydrationInfo.getOuncesbyDay(this.todaysDate)}`
+  this.displayHydrationCalendar();
+  // this.displayCommunityHydrationInfo():
+},
+
+displayHydrationCalendar() {
+  document.querySelector('hydration-weekly-avg').innerText = `You averaged ${this.currentUser.hydrationInfo.getOUncsByDay(this.todaysDate)}`
+  let dailyOz = document.querySelectorAll('.daily-oz');
+  let allDaysOuncesOverWeek = this.currentUser.hydrationInfo.calculateWeeksDailyOunces().sort((a, b) => a - b);
+  dailyOz.forEach((dailyOUnces, i) => dailyOunces.innerText  = allDaysOuncesOverWeek[i])
+}
 
 //***Sleep Display Section******************//
 }
