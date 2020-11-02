@@ -18,7 +18,7 @@ const domUpdates = {
   },
 
   displayName() {
-    document.getElementById('#header-name').innerText = `${this.currentUser.getFirstName()}'s FITLIT`
+    document.getElementById('header-name').innerText = `${this.currentUser.getFirstName()}'s FITLIT`
   },
 
   changeCard(hideCard, showCard) {
@@ -27,10 +27,10 @@ const domUpdates = {
   },
 
   displayDropDown() {
-    document.getElementById('#user-info-dropdown').classList.toggle('hide')
-    document.getElementById('#dropdown-name').innerText = this.currentUser.name
-    document.getElementById('#dropdown-goal').innerText = `Daily Step Goal: ${this.currentUser.dailyStepGoal}`;
-    document.getElementById('#dropdown-email').innerText = `User Account: ${this.currentUser.email}`;
+    document.getElementById('user-info-dropdown').classList.toggle('hide')
+    document.getElementById('dropdown-name').innerText = this.currentUser.name
+    document.getElementById('dropdown-goal').innerText = `Daily Step Goal: ${this.currentUser.dailyStepGoal}`;
+    document.getElementById('dropdown-email').innerText = `User Account: ${this.currentUser.email}`;
   },
 
   //*****************ACTIVITY DISPLAY SECTION************** */
@@ -45,7 +45,7 @@ const domUpdates = {
     this.displayUsersStepGoalComparison();
   },
   displayStepsInfo() {
-    document.getElementById('#input-steps-minutes').value = '';
+    document.getElementById('input-steps-minutes').value = '';
     document.getElementById('#input-steps').value = '';
     document.qetElementById('steps-info-miles-walked-today').innerText =
     `${this.currentUser.activityInfo.userMilesWalked(this.currentUser, this.todaysDate)}`

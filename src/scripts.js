@@ -1,40 +1,37 @@
 import './css/base.scss'
 import './css/styles.scss';
 
-
-import domUpdates from './domUpdates';
 import fetchData from './fetch';
+import domUpdates from './domUpdates';
+import moment from 'moment';
 import UserRepository from './UserRepository';
-import moment from 'moment'
 
 let currentUser
 let todaysDate
 
+/****************SECTIONS******************/
+const hydrationSection = document.querySelector('#hydration-card-container')
+const sleepSection = document.querySelector('#sleep-card-container')
+const stepSection = document.querySelector('#steps-card-container');
+const stairSection = document.querySelector('#stairs-card-container')
 
-
-//*****************CLASS INSTANTIATIONS*****************
+//*****************CLASS INSTANTIATION*****************
 function getData() {
   return fetchData()
   .then((data) => {
     let todaysDate = moment().format('YYYY/MM/DD');
     let userRepository = new UserRepository(data, todaysDate);
-    currentUser = userRepository.users[Math.floor(Math.random() * 50)]
+    currentUser = userRepository.users[Math.floor(Math.random() * userRepository.users.length)]
     domUpdates.defineData(currentUser, todaysDate, userRepository);
-    }).then(() => {
-      domUpdates.displayPage();
-    })
-    .catch((err) => console.log(err.message));
-  }
-
-function populateUserProfile() {
-  domUpdates.displayDropDown(currentUser);
+  }).then(() => {
+    domUpdates.displayPage();
+  })
+  .catch((err) => console.log(err.message));
 }
 
-//****************SECTIONS******************/
-const hydrationSection = document.querySelector('#hydration-card-container')
-const sleepSection = document.querySelector('#sleep-card-container')
-const stepSection = document.querySelector('#steps-card-container');
-const stairSection = document.querySelector('#stairs-card-container')
+const populateUserProfile = () => {
+  domUpdates.displayDropDown(currentUser);
+}
 
 //****************STEP SECTION**************** */
 
@@ -113,52 +110,10 @@ const stepCardHandler = () => {
       domUpdates.changeCard(event.target.parentNode, stairsMainCard)
     }
   }
-// //***********************QUERY SELECTORS*************************//
-//
-// let dailyOz = document.querySelectorAll('.daily-oz');
-// let dropdownEmail = document.querySelector('#dropdown-email');
-// let dropdownFriendsStepsContainer = document.querySelector('#dropdown-friends-steps-container');
-// let dropdownGoal = document.querySelector('#dropdown-goal');
-// let dropdownName = document.querySelector('#dropdown-name');
-// let headerName = document.querySelector('#header-name');
-// let hydrationCalendarCard = document.querySelector('#hydration-calendar-card');
-// let hydrationFriendOuncesToday = document.querySelector('#hydration-friend-ounces-today');
-// let hydrationFriendsCard = document.querySelector('#hydration-friends-card');
-// let hydrationInfoCard = document.querySelector('#hydration-info-card');
-// let hydrationInfoGlassesToday = document.querySelector('#hydration-info-glasses-today');
-// let hydrationMainCard = document.querySelector('#hydration-main-card');
-// let hydrationUserOuncesToday = document.querySelector('#hydration-user-ounces-today');
-// let mainPage = document.querySelector('main');
-// let profileButton = document.querySelector('#profile-button');
-
-
-//*****************MISC****************************************
-// user.findFriendsTotalStepsForWeek(userRepository.users, todayDate);
-
-// user.friendsActivityRecords.forEach(friend => {
-//   dropdownFriendsStepsContainer.innerHTML += `
-//   <p class='dropdown-p friends-steps'>${friend.firstName} |  ${friend.totalWeeklySteps}</p>
-//   `;
-// });
-
-// let friendsStepsParagraphs = document.querySelectorAll('.friends-steps');
-
-// friendsStepsParagraphs.forEach(paragraph => {
-//   if (friendsStepsParagraphs[0] === paragraph) {
-//     paragraph.classList.add('green-text');
-//   }
-//   if (friendsStepsParagraphs[friendsStepsParagraphs.length - 1] === paragraph) {
-//     paragraph.classList.add('red-text');
-//   }
-//   if (paragraph.innerText.includes('YOU')) {
-//     paragraph.classList.add('yellow-text');
-//   }
-// });
-
 //****************EVENT LISTENERS*********** */
 window.addEventListener('load', getData )
+document.querySelector('#profile-button').addEventListener('click', populateUserProfile);
 stepSection.addEventListener('click', stepCardHandler);
 stairSection.addEventListener('click', stairsCardHandler)
 hydrationSection.addEventListener('click', hydrationCardHandler)
 sleepSection.addEventListener('click', sleepCardHandler)
-document.querySelector('#profile-button').addEventListener('click', populateUserProfile);

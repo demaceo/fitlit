@@ -17,7 +17,7 @@ import SleepRepository from "./SleepRepository";
    }
 
    getFirstName() {
-     var names = this.name.split(' ');
+     let names = this.name.split(' ');
      return names[0].toUpperCase();
    }
 
