@@ -4,28 +4,25 @@ class SleepRepository {
     this.weeklyRecords = [];
   }
   // For a user (identified by their userID), the average number of hours slept per day
-  averageTotalHoursSlept() {
-    let totalAverage = 0;
+  averageHoursSlept() {
+    let totalHoursSlept = 0;
     this.records.forEach(record => {
-      totalAverage += record.hoursSlept
+      totalHoursSlept += record.hoursSlept
     });
-    return totalAverage = totalAverage / this.records.length
+    return Math.ceil(totalHoursSlept / this.records.length);
   }
   // For a user, their average sleep quality per day over all time
-  averageTotalSleepQuality() {
+  averageSleepQuality() {
     let totalAverage = 0;
     this.records.forEach(record => {
       totalAverage += record.sleepQuality
     });
-    return totalAverage = totalAverage / this.records.length
+    return Math.ceil(totalAverage / this.records.length);
   }
-  // For a user, how many hours they slept for a specific day (identified by a date)
-  findHoursSleptOnDate(date) {
-    this.records.find(record => {
-      if (record.date === date) {
-        return record.hoursSlept
-      }
-    })
+
+  findHoursSleptOn(date) {
+    const sleepLog = this.records.find(record => record.date === date)
+    return sleepLog.hoursSlept;
   }
   /////// ---- *** MORE DYNAMIC FOR THE ABOVE AND BELOW METHODS: *** ----
   // findSleepQualityOnDate(date, indexNumber) {
@@ -36,28 +33,43 @@ class SleepRepository {
   //   })
   // }
   // For a user, their sleep quality for a specific day (identified by a date)
-  findSleepQualityOnDate(date) {
-    this.records.find(record => {
-      if (record.date === date) {
-        return record.sleepQuality
-      }
-    })
+  findSleepQualityOn(date) {
+    const sleepLog = this.records.find(record => record.date === date)
+    return sleepLog.sleepQuality;
   }
+
   // For a user, how many hours slept each day over the course of a given week (7 days)
   //- you should be able to calculate this for any week, not just the latest week
+
   determineWeeklySchedule() {
     let mockRecords = this.records;
+    let week;
     let weekCounter = 0;
     mockRecords.filter(record => {
-      let week = mockRecords.slice(0, 7);
-      weekCount++;
+      week = mockRecords.slice(0, 7);
+      // console.log("week", week);
+      weekCounter++;
       // return this.weeklyRecords.push(`Week ${weekCount}: ${week}`);
-       return this.weeklyRecords.push(`{Week ${weeklyCount}: ${week}}`);
+      return this.weeklyRecords.push(`{Week ${weekCounter}: ${week}}`);
     })
+    // console.log(this.weeklyRecords);
   }
+
+  // determineWeeklySchedule() {
+  //   let mockRecords = this.records;
+  //   let week;
+  //   let weekCounter = 0;
+  //   mockRecords.reduce((acc, record) => {
+  //     week = mockRecords.slice(0, 7);
+  //     console.log("week", week);
+  //     weekCounter++;
+  //     return this.weeklyRecords.push(`{Week ${weekCounter}: ${week}}`);
+  //   }, [`{Week ${weekCounter}: ${week}`])
+  //   // console.log(this.weeklyRecords);
+  // }
   // function determineWeeklySchedule() {
   // mockRecords.filter(record => {
-  //   // console.log(“splice”, mockRecords.splice(0, 6))
+  //   console.log(“splice”, mockRecords.splice(0, 6))
   //    let week = mockRecords.splice(0, 7);
   //    console.log(“week”, week);
   //     weeklyCount++;
@@ -67,7 +79,7 @@ class SleepRepository {
   //     return weeklyRecords;
   //     }
   determineWeeklyHoursSlept(todaysDate) {
-    determineWeeklySchedule();
+    this.determineWeeklySchedule();
     let weeklyHoursSlept = [];
     let dayCounter = 0;
     this.weeklyRecords.forEach(week => {
@@ -78,12 +90,13 @@ class SleepRepository {
         })
       }
     })
+    // console.log(weeklyHoursSlept)
     return weeklyHoursSlept;
   }
   // For a user, their sleep quality each day over the course of a given week (7 days)
   //- you should be able to calculate this for any week, not just the latest week
   determineWeeklySleepQuality(todaysDate) {
-    determineWeeklySchedule();
+    this.determineWeeklySchedule();
     let weeklySleepQuality = [];
     let dayCounter = 0;
     this.weeklyRecords.forEach(week => {
@@ -104,57 +117,60 @@ class SleepRepository {
     });
     return totalAverage = totalAverage / this.records.length
   }
+
+
   // Find all users who average a sleep quality greater than 3 for a given week (7 days)
   //- you should be able to calculate this for any week, not just the latest week
-  filterSleepQualityGreaterThanThree() {
-    let qualitySleep = [];
-    this.records.filter(record => {
-      if(record.sleepQuality > 3){
-        return qualitySleep.push(record)
+  determineSleepQualityGreaterThanThree(todaysDate) {
+    let day = Number(todaysDate.charAt(8) + todaysDate.charAt(9));
+    let dayCounter = 1;
+    let weeksTotalSleepQuality = 0;
+    let userSQGreaterThanThree = false;
+    this.records.forEach(record => {
+      let recordDay = Number(record.date.charAt(8) + record.date.charAt(9));
+      if (recordDay === day && dayCounter < 7) {
+        day++;
+        dayCounter++;
+        weeksTotalSleepQuality += record.sleepQuality;
+      } else if (dayCounter === 7) {
+        weeksTotalSleepQuality += record.sleepQuality;
+        let weeksAverageSQ = weeksTotalSleepQuality / dayCounter;
+        if (weeksAverageSQ > 3) {
+          userSQGreaterThanThree = true;
+        }
+      }
+    });
+    return userSQGreaterThanThree;
+  }
+
+  // For a given day (identified by the date),
+  //find the users who slept the most number of hours (one or more if they tied)
+  determineBestSleeper(date) {
+    let dayOfRest = [];
+    this.records.forEach(record => {
+      if (record.date === date) {
+        dayOfRest.push(record)
       }
     })
-    return qualitySleep;
+    dayOfRest.sort((a, b) => {
+      b.hoursSlept - a.hoursSlept
+    })
+    let bestNightsSleeper = [dayOfRest[0]];
+    dayOfRest.forEach(sleep => {
+      if (sleep.hoursSlept === dayOfRest[0].hoursSlept)
+        bestNightsSleeper.push(sleep)
+    })
+    return bestNightsSleeper;
   }
-  // For a given day (identified by the date), find the users who slept the most number of hours (one or more if they tied)
+
+
   // Make a metric of your own! Document it, calculate it, and display it.
-  //
-  // updateSleep(date, hours, quality) {
-  //   this.sleepHoursRecord.unshift({
-  //     ‘date’: date,
-  //     ‘hours’: hours
-  //   });
-  //   this.sleepQualityRecord.unshift({
-  //     ‘date’: date,
-  //     ‘quality’: quality
-  //   });
-  //   if (this.sleepHoursRecord.length) {
-  //     this.hoursSleptAverage = ((hours + (this.hoursSleptAverage * (this.sleepHoursRecord.length - 1))) / this.sleepHoursRecord.length).toFixed(1);
-  //   } else {
-  //     this.hoursSleptAverage = hours;
-  //   }
-  //   if (this.sleepQualityRecord.length) {
-  //     this.sleepQualityAverage = ((quality + (this.sleepQualityAverage * (this.sleepQualityRecord.length - 1))) / this.sleepQualityRecord.length).toFixed(1);
-  //   } else {
-  //     this.sleepQualityAverage = quality;
-  //   }
-  // }
-  // calculateAverageHoursThisWeek(todayDate) {
-  //   return (this.sleepHoursRecord.reduce((sum, sleepAct) => {
-  //     let index = this.sleepHoursRecord.indexOf(this.sleepHoursRecord.find(sleep => sleep.date === todayDate));
-  //     if (index <= this.sleepHoursRecord.indexOf(sleepAct) && this.sleepHoursRecord.indexOf(sleepAct) <= (index + 6)) {
-  //       sum += sleepAct.hours;
-  //     }
-  //     return sum;
-  //   }, 0) / 7).toFixed(1);
-  // }
-  // calculateAverageQualityThisWeek(todayDate) {
-  //   return (this.sleepQualityRecord.reduce((sum, sleepAct) => {
-  //     let index = this.sleepQualityRecord.indexOf(this.sleepQualityRecord.find(sleep => sleep.date === todayDate));
-  //     if (index <= this.sleepQualityRecord.indexOf(sleepAct) && this.sleepQualityRecord.indexOf(sleepAct) <= (index + 6)) {
-  //       sum += sleepAct.quality;
-  //     }
-  //     return sum;
-  //   }, 0) / 7).toFixed(1);
-  // }
+  // find the user's night of sleep....EVER!
+  findWorstNightsSleep() {
+    let worstSleep = this.records.sort((a, b) => {
+      a.sleepQuality - b.sleepQuality
+    })
+    return `On ${worstSleep[0].date}, your sleep quality of ${worstSleep[0].sleepQuality} was godawful.`
+  }
 }
 export default SleepRepository;
