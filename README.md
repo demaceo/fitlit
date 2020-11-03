@@ -53,6 +53,9 @@ Objective - Calculate all of the users' average sleep quality that is less than 
 3. Calculate the each users' average sleep quality for a given week.
 4. Display users' who have an average sleep quality < 3.
 
+
+Gifs below:
+
 ![]()
 
 
