@@ -17,16 +17,21 @@ import SleepRepository from "./SleepRepository";
    }
 
    getFirstName() {
-     var names = this.name.split(' ');
+     let names = this.name.split(' ');
      return names[0].toUpperCase();
    }
 
-   findFriendsNames(users) {
-     this.friends.forEach(friend => {
-       this.friendsNames.push(users.find(user => user.id === friend).getFirstName());
-     })
-   }
-
+   findFriends(userRepository) {
+   return this.friends.reduce((friendsInfo, friend) => {
+     friend = userRepository.users.find((user) => user.id === friend);
+     let friendInfo = {
+       firstName: friend.name,
+       weeklySteps: friend.activityInfo.getAverageStepsThisWeek(),
+     };
+     friendsInfo.push(friendInfo);
+     return friendsInfo;
+   }, []);
+ }
    findFriendsTotalStepsForWeek(users, date) {
      this.friends.map(friend => {
        let matchedFriend = users.find(user => user.id === friend);
