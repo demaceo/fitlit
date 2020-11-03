@@ -2,7 +2,7 @@
 Mod 2
 
 [Deployed Site]
-brief exxplanation of the website 
+brief explanation of the website 
 
 ### Contributors
 * Peyton Jones [Github Profile](https://github.com/Peytonjo)
