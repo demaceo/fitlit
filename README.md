@@ -1,8 +1,8 @@
 # FitLit refactor tractor - group project
 Mod 2
 
-[Deployed Site]
-brief explanation of the website 
+[Deployed GitHub Page](https://demaceo.github.io/fitlit)
+
 
 ### Contributors
 * Peyton Jones [Github Profile](https://github.com/Peytonjo)
