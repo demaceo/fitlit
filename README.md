@@ -54,9 +54,7 @@ Objective - Calculate all of the users' average sleep quality that is less than 
 4. Display users' who have an average sleep quality < 3.
 
 
-Gifs below:
-
-![]()
+![](http://g.recordit.co/xiy6sR3lvk.gif)
 
 
 
